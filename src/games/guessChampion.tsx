@@ -1,8 +1,8 @@
 // Engine: guess the champion from a clue, with extra hints after each miss.
-// Used by "Title Shot" (clue = champion title) and "Redacted Lore" (clue = lore blurb).
+// Used by "Redacted Lore" (clue = lore blurb) and "Silhouette" (clue = 3D shadow).
 
 import { useMemo, useState, type FC, type ReactNode } from 'react';
-import type { Champion } from '../data/types';
+import type { Champion, GameData } from '../data/types';
 import { createRng, pick } from '../lib/random';
 import { capStrokes, MAX_OVER_PAR } from '../lib/scoring';
 import { ChampionInput } from '../components/ChampionInput';
@@ -10,20 +10,33 @@ import type { HoleProps } from './types';
 
 const MAX_GUESSES = 6;
 
-function escapeRegExp(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export interface Hint {
+  label: string;
+  value: ReactNode;
 }
 
-function redact(text: string, c: Champion): string {
-  const words = new Set([c.name, c.id, ...c.name.split(/[\s&]+/)].filter((w) => w.length >= 3));
-  let out = text;
-  for (const w of words) out = out.replace(new RegExp(escapeRegExp(w), 'gi'), '▇▇▇');
-  return out;
+interface Options {
+  /** The clue. `misses` = wrong guesses so far; `finished` once the hole is over. */
+  clue: (target: Champion, misses: number, finished: boolean) => ReactNode;
+  /** Champions that can be the answer (default: all of them). */
+  pool?: (data: GameData) => Champion[];
+  /** Hints, unlocked one per miss (default: class, attack type, first letter, blurred portrait). */
+  hints?: (target: Champion, data: GameData) => Hint[];
 }
 
-export function makeGuessChampionHole(mode: 'title' | 'lore'): FC<HoleProps> {
+const defaultHints = (target: Champion, data: GameData): Hint[] => [
+  { label: 'Class', value: target.tags.join(' · ') },
+  { label: 'Attack type', value: target.attackRange >= 300 ? 'Ranged' : 'Melee' },
+  { label: 'First letter', value: target.name[0] },
+  {
+    label: 'Portrait',
+    value: <img className="blurred-portrait" src={data.championImg(target)} alt="Blurred champion portrait" />,
+  },
+];
+
+export function makeGuessChampionHole({ clue, pool, hints = defaultHints }: Options): FC<HoleProps> {
   return function GuessChampionHole({ data, seed, par, onFinish }: HoleProps) {
-    const target = useMemo(() => pick(createRng(seed), data.champions), [data, seed]);
+    const target = useMemo(() => pick(createRng(seed), pool ? pool(data) : data.champions), [data, seed]);
     const [guesses, setGuesses] = useState<Champion[]>([]);
     const [status, setStatus] = useState<'playing' | 'won' | 'lost'>('playing');
 
@@ -47,40 +60,20 @@ export function makeGuessChampionHole(mode: 'title' | 'lore'): FC<HoleProps> {
       }
     }
 
-    const hints: { label: string; value: ReactNode }[] = [
-      { label: 'Class', value: target.tags.join(' · ') },
-      { label: 'Attack type', value: target.attackRange >= 300 ? 'Ranged' : 'Melee' },
-      { label: 'First letter', value: target.name[0] },
-      {
-        label: 'Portrait',
-        value: <img className="blurred-portrait" src={data.championImg(target)} alt="Blurred champion portrait" />,
-      },
-    ];
-
     return (
       <div className="hole-body">
-        <div className="clue-card">
-          {mode === 'title' ? (
-            <>
-              <span className="clue-kicker">Which champion is…</span>
-              <p className="clue-title">“{target.title}”</p>
-            </>
-          ) : (
-            <>
-              <span className="clue-kicker">Whose story is this?</span>
-              <p className="clue-lore">{redact(target.blurb, target)}</p>
-            </>
-          )}
-        </div>
+        {clue(target, wrong, status !== 'playing')}
 
         {wrong > 0 && status === 'playing' && (
           <div className="hints">
-            {hints.slice(0, wrong).map((h) => (
-              <div className="hint" key={h.label}>
-                <span>{h.label}</span>
-                <strong>{h.value}</strong>
-              </div>
-            ))}
+            {hints(target, data)
+              .slice(0, wrong)
+              .map((h) => (
+                <div className="hint" key={h.label}>
+                  <span>{h.label}</span>
+                  <strong>{h.value}</strong>
+                </div>
+              ))}
           </div>
         )}
 

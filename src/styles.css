@@ -1,4 +1,4 @@
-/* Rift Links — night-golf meets Hextech gold. All colours are tokens up here. */
+/* LoL Nerdles — night-golf meets Hextech gold. All colours are tokens up here. */
 :root {
   --bg: #07110e;
   --bg-2: #0c1b16;
@@ -236,18 +236,37 @@ input[type='range'] { width: 100%; accent-color: var(--gold); height: 28px; }
 }
 .model-tag.guess-tag { bottom: auto; transform: translate(-50%, -130%); color: var(--gold-bright); }
 
-/* recipe */
-.components { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-.component { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 96px; text-align: center; font-size: 0.8rem; }
-.component img { width: 52px; height: 52px; border-radius: 8px; border: 1px solid var(--line); }
-.options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.option { display: flex; align-items: center; gap: 10px; text-align: left; padding: 8px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
-.option img { width: 40px; height: 40px; border-radius: 6px; }
-.option:hover:not(:disabled) { border-color: var(--gold); }
-.option.right { border-color: var(--par); background: rgba(79, 191, 127, 0.12); }
-.option.wrong { border-color: var(--way-over); background: rgba(224, 100, 90, 0.12); }
-.option.dim { opacity: 0.45; }
-.option:disabled { color: var(--text); }
+/* silhouette */
+.silhouette-stage {
+  position: relative; height: clamp(260px, 45vh, 380px); overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, #fbf6ea, #d8bd84 85%);
+  border: 1px solid var(--line); border-radius: var(--radius);
+}
+.silhouette-stage canvas { display: block; width: 100%; height: 100%; }
+.silhouette-stage .model-stage-msg { color: #5a4a2a; }
+
+/* rift connections */
+.conn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.conn-tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  min-height: 84px; padding: 8px 4px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line);
+  color: var(--text); font-size: 0.78rem; font-weight: 600; line-height: 1.15; text-align: center;
+  transition: transform 0.1s, background 0.15s;
+}
+.conn-tile img { width: 40px; height: 40px; border-radius: 8px; }
+.conn-tile:hover:not(:disabled) { border-color: var(--gold); }
+.conn-tile:active:not(:disabled) { transform: scale(0.97); }
+.conn-tile.selected { background: var(--gold-bright); color: #1a140a; border-color: var(--gold); }
+.conn-tile:disabled { opacity: 0.6; }
+.conn-band { border-radius: 10px; padding: 10px 12px; text-align: center; color: #1a140a; }
+.conn-band strong { display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.conn-band span { font-size: 0.88rem; }
+.conn-band.level-0 { background: #e9cf6a; }
+.conn-band.level-1 { background: #8cc56f; }
+.conn-band.level-2 { background: #8db6ea; }
+.conn-band.level-3 { background: #bb93db; }
+.conn-band.missed { opacity: 0.7; }
+.conn-status { min-height: 1.4em; margin: 0; }
 
 /* deep dive */
 .dive-answers { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
@@ -302,7 +321,8 @@ input[type='range'] { width: 100%; accent-color: var(--gold); height: 28px; }
   .course-option { flex-direction: row; justify-content: space-between; padding: 14px 16px; }
   .course-holes { font-size: 1.8rem; }
   .home-links { grid-template-columns: 1fr; }
-  .options { grid-template-columns: 1fr; }
+  .conn-tile { font-size: 0.68rem; min-height: 72px; }
+  .conn-tile img { width: 32px; height: 32px; }
   .hole { padding: 16px; }
   .hl-card img { width: 48px; height: 48px; }
 }

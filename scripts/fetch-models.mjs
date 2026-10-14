@@ -48,6 +48,7 @@ const FIXES = {
   Jinx: { skip: 'braids stand straight up in the raw pose' },
   Kayn: { skip: 'his scythe stands next to him' },
   Chogath: { skip: 'grows all game long' },
+  Evelynn: { skip: 'nearly invisible without her in-game shader' },
   Lux: { turnAround: true },
 };
 
@@ -65,11 +66,41 @@ function assetPath(path) {
 /** A skin either names its texture directly or points at a material that does. */
 function textureOf(bin, props) {
   if (props.texture) return assetPath(props.texture);
-  const samplers = props.material ? bin[props.material]?.samplerValues : undefined;
+  const material = props.material ?? props.Material;
+  const samplers = material ? bin[material]?.samplerValues : undefined;
   if (!samplers) return null;
-  const withPath = samplers.filter((s) => s.texturePath ?? s.texture);
-  const sampler = withPath.find((s) => /diffuse|main|color/i.test(s.textureName ?? '')) ?? withPath[0];
+  // The colour map, not a mask or one of the game's shared helper textures (all black, all white …).
+  const sampler = samplers.find(
+    (s) => /diffuse|main|color/i.test(s.textureName ?? '') && !/^assets\/shared\//i.test(s.texturePath ?? s.texture ?? ''),
+  );
   return sampler ? assetPath(sampler.texturePath ?? sampler.texture) : null;
+}
+
+const NOT_A_COLOUR_MAP = /loadscreen|mask|msk|shade|_mult|texswap|scroll/;
+
+/** The colour textures (PNGs) in a model's folder on Community Dragon. */
+async function texturesIn(base, folder) {
+  const html = await (await fetch(`${base}/game/${folder}/`)).text();
+  return [...html.matchAll(/href="([^"/?]+\.png)"/g)].map((m) => m[1]).filter((f) => !NOT_A_COLOUR_MAP.test(f));
+}
+
+/**
+ * Fallback when the skin data points at a material we can't read: Riot names
+ * textures after the part they paint ("Rakan_Base_Wing_Mat" →
+ * "rakan_base_wing_tx_cm.png"), so pick the file that shares the most words.
+ */
+function guessTexture(files, part, char) {
+  const words = part
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter((w) => w.length > 2 && !['mat', 'mtl', 'base', 'material', 'skin', char].includes(w));
+  let best = null;
+  let bestScore = 0;
+  for (const f of files) {
+    const score = words.filter((w) => f.includes(w)).length;
+    if (score > bestScore) [best, bestScore] = [f, score];
+  }
+  return best;
 }
 
 async function measure(base, char, skin = 0, extraHide = []) {
@@ -82,16 +113,33 @@ async function measure(base, char, skin = 0, extraHide = []) {
       [...(props.initialSubmeshToHide ?? '').split(/[\s,]+/), ...extraHide].map((s) => s.toLowerCase()).filter(Boolean),
     ),
   ];
+  const mesh = assetPath(props.simpleSkin);
+  const folder = mesh.slice(0, mesh.lastIndexOf('/'));
+  let files; // only listed when needed
+  const fallback = async (part) => {
+    files ??= await texturesIn(base, folder);
+    const file = part ? guessTexture(files, part, char) : null;
+    return file && `${folder}/${file}`;
+  };
+
   const overrides = {};
   for (const o of props.materialOverride ?? []) {
-    if (o.submesh) overrides[o.submesh.toLowerCase()] = textureOf(bin, o);
+    if (o.submesh) overrides[o.submesh.toLowerCase()] = textureOf(bin, o) ?? (await fallback(o.submesh));
   }
-  const mesh = assetPath(props.simpleSkin);
+  let texture = textureOf(bin, props);
+  if (!texture) {
+    // No main texture named at all: take the folder's main colour map, the one no part claimed.
+    files ??= await texturesIn(base, folder);
+    const used = new Set(Object.values(overrides));
+    const free = files.filter((f) => !used.has(`${folder}/${f}`) && /cm/.test(f));
+    const main = free.find((f) => f.includes('base')) ?? free[0];
+    texture = main ? `${folder}/${main}` : null;
+  }
   const scale = props.skinScale ?? 1;
   const shape = shapeOf(parseSkn(await get(`${base}/game/${mesh}`)), hide);
   return {
     mesh,
-    texture: textureOf(bin, props),
+    texture,
     overrides,
     hide,
     scale,

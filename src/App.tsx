@@ -30,7 +30,7 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <button className="brand" onClick={home}>
-          <span aria-hidden>⛳</span> Rift Links
+          LoL Nerdles
         </button>
       </header>
 
@@ -63,7 +63,7 @@ export default function App() {
       </main>
 
       <footer className="legal">
-        Rift Links was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot
+        LoL Nerdles was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot
         Games does not endorse or sponsor this project.
       </footer>
     </div>

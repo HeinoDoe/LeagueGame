@@ -5,23 +5,15 @@
 // so 3 holes = the first 3, 6 = the first 6, 9 = all of them.
 
 import type { HoleDef } from './types';
-import { makeGuessChampionHole } from './guessChampion';
+import { RedactedLoreHole } from './redactedLore';
+import { SilhouetteHole } from './silhouette';
+import { ConnectionsHole } from './connections';
 import { makeHigherLowerHole } from './higherLower';
 import { makeEstimateHole } from './estimate';
-import { RecipeHole } from './recipe';
 import { SizeUpHole } from './sizeUp';
 import { DeepDiveHole } from './deepDive';
 
 export const HOLES: HoleDef[] = [
-  {
-    id: 'title-shot',
-    name: 'Title Shot',
-    tagline: 'Name the champion from their title',
-    howTo: 'You get a champion title. Guess who it belongs to — each miss reveals a hint. Up to 6 guesses.',
-    par: 4,
-    kind: 'procedural',
-    Component: makeGuessChampionHole('title'),
-  },
   {
     id: 'redacted-lore',
     name: 'Redacted Lore',
@@ -29,7 +21,7 @@ export const HOLES: HoleDef[] = [
     howTo: 'A champion bio with the name blacked out. Guess the champion — each miss reveals a hint.',
     par: 4,
     kind: 'procedural',
-    Component: makeGuessChampionHole('lore'),
+    Component: RedactedLoreHole,
   },
   {
     id: 'gold-rush',
@@ -90,13 +82,22 @@ export const HOLES: HoleDef[] = [
     }),
   },
   {
-    id: 'recipe-book',
-    name: 'Recipe Book',
-    tagline: 'Which item do these build into?',
-    howTo: 'You see an item’s components. Pick the finished item from 4 options. 3 recipes.',
-    par: 3,
+    id: 'silhouette',
+    name: 'Silhouette',
+    tagline: 'Name the champion from their shadow',
+    howTo: 'A champion’s 3D model turns as a black silhouette. Every miss turns the lights up a little and unlocks a hint. Up to 6 guesses.',
+    par: 4,
     kind: 'procedural',
-    Component: RecipeHole,
+    Component: SilhouetteHole,
+  },
+  {
+    id: 'rift-connections',
+    name: 'Rift Connections',
+    tagline: 'Find four groups of four',
+    howTo: 'Sort 16 champions into 4 hidden groups — a region, a skin line, a release year, a quirk of their name… Pick four and submit. 4 mistakes allowed.',
+    par: 4,
+    kind: 'procedural',
+    Component: ConnectionsHole,
   },
   {
     id: 'size-up',

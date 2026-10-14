@@ -10,7 +10,7 @@ import { capStrokes, strokesFromAvgError } from '../lib/scoring';
 import type { HoleProps } from './types';
 
 const ModelStage = lazy(() => import('../components/ModelStage').then((m) => ({ default: m.ModelStage })));
-const preload = (info: ModelInfo) => import('../components/ModelStage').then((m) => m.preloadModel(info));
+const preload = (info: ModelInfo) => import('../lib/models3d').then((m) => m.preloadModel(info));
 
 const ROUNDS = 3;
 const MIN_RATIO = 1 / 6;

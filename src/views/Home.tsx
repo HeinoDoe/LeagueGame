@@ -25,7 +25,7 @@ export function Home({ onPlay, onRange, onStats }: Props) {
     <div className="home">
       <section className="hero">
         <h1>
-          Rift <em>Links</em>
+          LoL <em>Nerdles</em>
         </h1>
         <p className="lede">New League mini-games every day.</p>
       </section>

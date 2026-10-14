@@ -28,7 +28,7 @@ export function Stats({ onExit }: Props) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'rift-links-plays.json';
+    a.download = 'lol-nerdles-plays.json';
     a.click();
     URL.revokeObjectURL(url);
   }

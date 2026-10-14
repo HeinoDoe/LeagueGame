@@ -1,14 +1,15 @@
 {
-  "name": "rift-links",
+  "name": "lol-nerdles",
   "version": "0.1.0",
-  "description": "Rift Links — a golf course of daily League of Legends mini-games",
+  "description": "LoL Nerdles — daily League of Legends mini-games",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "fetch-data": "node scripts/fetch-data.mjs",
     "typecheck": "tsc --noEmit",
-    "fetch-models": "node scripts/fetch-models.mjs"
+    "fetch-models": "node scripts/fetch-models.mjs",
+    "fetch-connections": "node scripts/fetch-connections.mjs"
   },
   "dependencies": {
     "react": "^19.3.0",

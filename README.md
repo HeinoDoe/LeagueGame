@@ -1,4 +1,4 @@
-# ⛳ Rift Links
+# LoL Nerdles
 
 A daily golf course of League of Legends mini-games. Every day there's a new
 course of 9 holes; players choose a **Quick Three**, **Half Course (6)** or
@@ -33,7 +33,8 @@ Other commands:
 | `npm run build` | Typecheck + build the final site into `dist/` |
 | `npm run preview` | Preview the built site locally |
 | `npm run fetch-data` | Save the latest champion/item data into `public/data/` (see below) |
-| `npm run fetch-models` | Re-measure the 3D models for **Size Up** (once per patch, see below) |
+| `npm run fetch-models` | Re-measure the 3D models for **Size Up** + **Silhouette** (once per patch, see below) |
+| `npm run fetch-connections` | Rebuild the champion groups for **Rift Connections** (once per patch) |
 
 ## 2. Where the data comes from
 
@@ -45,12 +46,17 @@ Champions and items come from **Data Dragon**, Riot's free public data files
   saved in `public/data/` and ships with your site. Daily puzzles then stay
   stable until *you* update them (a new champion mid-day won't change today's puzzle).
 
-**Size Up** uses the real 3D models from **Community Dragon** (a fan mirror of
-the game files). `npm run fetch-models` measures every model and saves the
+**Size Up** and **Silhouette** use the real 3D models from **Community Dragon**
+(a fan mirror of the game files). `npm run fetch-models` measures every model and saves the
 heights to `src/data/generated/models.json`; the browser then loads the models
 straight from Community Dragon. The raw models have no animations, so a few
 champions stand in an odd pose — the `FIXES` list in `scripts/fetch-models.mjs`
 skips or turns those. Run it once per patch.
+
+**Rift Connections** groups come from `npm run fetch-connections`: regions and
+release dates from Riot's Universe site, skin lines and races from Community
+Dragon, resource types and name/title quirks from Data Dragon. Your own groups
+go in `src/data/curated/connections.ts`.
 
 **Deep Dive** uses hand-made data you should check, because I wrote a first
 draft: `src/data/curated/deepDive.ts` (prompts + rarity tiers).
@@ -59,13 +65,13 @@ draft: `src/data/curated/deepDive.ts` (prompts + rarity tiers).
 
 | Hole | Game | Par | Type |
 |---|---|---|---|
-| Title Shot | Guess the champion from their title, hints after each miss | 4 | procedural |
 | Redacted Lore | Guess the champion from their bio (name blacked out) | 4 | procedural |
 | Gold Rush | Higher/lower on item gold cost, 5 calls | 4 | procedural |
 | Health Bar | Higher/lower on champion base HP, 5 calls | 4 | procedural |
 | Range Finder | Estimate attack range with a slider | 3 | procedural |
 | Price Check | Estimate an item's total cost with a slider | 3 | procedural |
-| Recipe Book | Which item do these components build into? | 3 | procedural |
+| Silhouette | Guess the champion from their 3D model's shadow; each miss adds light + a hint | 4 | procedural |
+| Rift Connections | Sort 16 champions into 4 hidden groups (NYT Connections-style) | 4 | procedural |
 | Size Up | Resize a champion's 3D model next to another (Magnitudle-style) | 3 | procedural |
 | Deep Dive | 3 answers to a prompt, rarer = more points (Krillion-style) | 5 | curated |
 
@@ -79,7 +85,7 @@ work from you. **Curated** holes need you to add content now and then.
 - 3 holes = the first 3 of today's 9, 6 = the first 6. Results are saved, so a
   player can finish 3 and later **extend to 6 or 9** without replaying.
 - Scoring: each hole turns its result into strokes (capped at par + 3). Example:
-  Title Shot solved on the 1st guess = 2 strokes = eagle on a par 4.
+  Silhouette solved on the 1st guess = 2 strokes = eagle on a par 4.
 - At the end you get a shareable emoji scorecard (🦅 🐦 🟩 🟨 🟥).
 
 ## 5. Finding your favourite games
@@ -97,16 +103,17 @@ src/
   views/               ← Home, Course (3/6/9), Range, Stats
   games/
     registry.ts        ← THE LIST OF HOLES — add/remove games here
-    guessChampion.tsx  ← engine: guess a champion from a clue
+    guessChampion.tsx  ← engine: guess a champion from a clue (Redacted Lore, Silhouette)
     higherLower.tsx    ← engine: higher/lower chains
     estimate.tsx       ← engine: slider estimates
-    recipe.tsx, sizeUp.tsx, deepDive.tsx
+    sizeUp.tsx, connections.tsx, deepDive.tsx …
   components/          ← scorecard, result card, champion input …
   data/
     load.ts            ← Data Dragon loader
     curated/           ← your hand-made content
   lib/                 ← seeded random, dates, golf scoring, saving
 scripts/fetch-data.mjs ← pins patch data into public/data/
+scripts/fetch-models.mjs, fetch-connections.mjs ← regenerate src/data/generated/
 ```
 
 ## 7. Adding a new hole

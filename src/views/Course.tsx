@@ -61,7 +61,7 @@ export function Course({ data, size, onChangeSize, onExit }: Props) {
 
   function share() {
     const line = layout.map((h) => scoreEmoji(results[h.id].strokes, h.par)).join('');
-    const text = `⛳ Rift Links ${date} · ${size} holes\n${line}  ${totalStrokes} (${formatToPar(totalStrokes - totalPar)})`;
+    const text = `LoL Nerdles ${date} · ${size} holes\n${line}  ${totalStrokes} (${formatToPar(totalStrokes - totalPar)})`;
     navigator.clipboard?.writeText(text).then(
       () => setCopied(true),
       () => setCopied(false),
