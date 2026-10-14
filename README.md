@@ -58,8 +58,12 @@ release dates from Riot's Universe site, skin lines and races from Community
 Dragon, resource types and name/title quirks from Data Dragon. Your own groups
 go in `src/data/curated/connections.ts`.
 
-**Deep Dive** uses hand-made data you should check, because I wrote a first
-draft: `src/data/curated/deepDive.ts` (prompts + rarity tiers).
+**Deep Dive** asks 5 categories a day: 3 champion questions built from the
+Rift Connections groups (rarity = how few skins a champion has, or the list
+order for hand-made groups) and 2 free-text questions about pro play and the
+game from `src/data/curated/deepDive.ts`. Those tiers are first guesses — move
+answers between tiers, add questions, and update the year ranges after each
+Worlds/MSI.
 
 ## 3. The 9 holes
 
@@ -73,7 +77,7 @@ draft: `src/data/curated/deepDive.ts` (prompts + rarity tiers).
 | Silhouette | Guess the champion from their 3D model's shadow; each miss adds light + a hint | 4 | procedural |
 | Rift Connections | Sort 16 champions into 4 hidden groups (NYT Connections-style) | 4 | procedural |
 | Size Up | Resize a champion's 3D model next to another (Magnitudle-style) | 3 | procedural |
-| Deep Dive | 3 answers to a prompt, rarer = more points (Krillion-style) | 5 | curated |
+| Deep Dive | 5 categories, one answer each, rarer = more points (Krillion-style) | 5 | curated |
 
 **Procedural** holes generate new puzzles forever from Riot's data — no daily
 work from you. **Curated** holes need you to add content now and then.

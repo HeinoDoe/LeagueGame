@@ -9,11 +9,15 @@ export interface ConnectionGroup {
   id: string;
   kind: string; // region, skinline, year, … — puzzles mix kinds
   level: number; // 0 = easiest (yellow) … 3 = trickiest (purple)
-  label: string;
+  label: string; // shown on the solved Connections band
+  ask?: string; // the same group as a Deep Dive question ("Name a champion from Ionia")
   members: string[]; // Data Dragon champion ids
 }
 
 export const GROUPS: ConnectionGroup[] = [...generated.groups, ...CURATED_GROUPS];
+
+/** Skins per champion — a rough stand-in for how often players think of them. */
+export const SKIN_COUNTS: Record<string, number> = generated.skins;
 
 export interface PuzzleGroup {
   group: ConnectionGroup;
@@ -25,7 +29,7 @@ export interface PuzzleGroup {
  * else — but a kind with many groups still comes up more often than one with a
  * single group (which would otherwise repeat every few days).
  */
-function pickKind(rng: Rng, groups: ConnectionGroup[]): string {
+export function pickKind(rng: Rng, groups: ConnectionGroup[]): string {
   const counts = new Map<string, number>();
   for (const g of groups) counts.set(g.kind, (counts.get(g.kind) ?? 0) + 1);
   const weights = [...counts].map(([kind, n]) => [kind, Math.sqrt(n)] as const);

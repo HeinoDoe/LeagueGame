@@ -111,8 +111,8 @@ export const HOLES: HoleDef[] = [
   {
     id: 'deep-dive',
     name: 'Deep Dive',
-    tagline: 'Rare answers sink you deeper',
-    howTo: 'Give 3 answers to the prompt. Obvious answers score 1, deep cuts score 4. Wrong answers score 0.',
+    tagline: '5 categories — the rarer your answer, the deeper you dive',
+    howTo: 'Five different categories, one answer each: champions, pro play, Worlds trivia … Obvious answers score 1, deep cuts score 4. 3 tries per category.',
     par: 5,
     kind: 'curated',
     Component: DeepDiveHole,
