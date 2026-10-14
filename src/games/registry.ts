@@ -6,10 +6,12 @@
 
 import type { HoleDef } from './types';
 import { RedactedLoreHole } from './redactedLore';
+import { StatCheckHole } from './statCheck';
+import { ProPlayHole } from './proPlay';
+import { BigNumbersHole } from './bigNumbers';
 import { SilhouetteHole } from './silhouette';
+import { SplashZoomHole } from './splashZoom';
 import { ConnectionsHole } from './connections';
-import { makeHigherLowerHole } from './higherLower';
-import { makeEstimateHole } from './estimate';
 import { SizeUpHole } from './sizeUp';
 import { DeepDiveHole } from './deepDive';
 
@@ -24,62 +26,31 @@ export const HOLES: HoleDef[] = [
     Component: RedactedLoreHole,
   },
   {
-    id: 'gold-rush',
-    name: 'Gold Rush',
-    tagline: 'Higher or lower: item gold cost',
-    howTo: 'Does the next item cost more or less gold? 5 calls in a row. A perfect run is an eagle.',
+    id: 'stat-check',
+    name: 'Stat Check',
+    tagline: 'Higher or lower: champion stats',
+    howTo: 'Is the next champion’s stat higher or lower? The stat changes every round — health, armor, move speed, range … 5 calls.',
     par: 4,
     kind: 'procedural',
-    Component: makeHigherLowerHole({
-      question: 'Does the next item cost more or less?',
-      format: (v) => `${v.toLocaleString()}g`,
-      pool: (d) => d.items.filter((i) => i.total >= 300).map((i) => ({ key: i.id, label: i.name, img: d.itemImg(i), value: i.total })),
-    }),
+    Component: StatCheckHole,
   },
   {
-    id: 'health-bar',
-    name: 'Health Bar',
-    tagline: 'Higher or lower: base HP',
-    howTo: 'Does the next champion have more or less base health at level 1? 5 calls in a row.',
+    id: 'pro-play',
+    name: 'Pro Play',
+    tagline: 'Higher or lower: real Worlds stats',
+    howTo: 'Players, champions or teams at Worlds: more or fewer kills, games, picks, wins? 5 calls, real stats from the official esports feed.',
     par: 4,
     kind: 'procedural',
-    Component: makeHigherLowerHole({
-      question: 'More or less base HP at level 1?',
-      format: (v) => `${Math.round(v)} HP`,
-      pool: (d) => d.champions.map((c) => ({ key: c.id, label: c.name, img: d.championImg(c), value: c.hp })),
-    }),
+    Component: ProPlayHole,
   },
   {
-    id: 'range-finder',
-    name: 'Range Finder',
-    tagline: 'Estimate a champion’s attack range',
-    howTo: 'Slide to the champion’s base attack range. 3 rounds, scored by how close you get.',
+    id: 'big-numbers',
+    name: 'Big Numbers',
+    tagline: 'Estimate something huge',
+    howTo: 'Guess a big number on a slider from 1 to a billion (or type it). Do the maths if you can. 3 rounds, scored by how close you get.',
     par: 3,
     kind: 'procedural',
-    Component: makeEstimateHole({
-      question: () => 'Base attack range?',
-      min: 100,
-      max: 700,
-      step: 25,
-      unit: 'units',
-      pool: (d) => d.champions.map((c) => ({ key: c.id, label: c.name, img: d.championImg(c), value: c.attackRange })),
-    }),
-  },
-  {
-    id: 'price-check',
-    name: 'Price Check',
-    tagline: 'Estimate an item’s total cost',
-    howTo: 'Slide to the item’s total gold cost. 3 rounds, scored by how close you get.',
-    par: 3,
-    kind: 'procedural',
-    Component: makeEstimateHole({
-      question: () => 'Total gold cost?',
-      min: 0,
-      max: 4000,
-      step: 25,
-      unit: 'gold',
-      pool: (d) => d.items.filter((i) => i.total >= 500).map((i) => ({ key: i.id, label: i.name, img: d.itemImg(i), value: i.total })),
-    }),
+    Component: BigNumbersHole,
   },
   {
     id: 'silhouette',
@@ -89,6 +60,15 @@ export const HOLES: HoleDef[] = [
     par: 4,
     kind: 'procedural',
     Component: SilhouetteHole,
+  },
+  {
+    id: 'splash-zoom',
+    name: 'Splash Zoom',
+    tagline: 'Name the champion from a tiny piece of splash art',
+    howTo: 'You see a zoomed-in piece of a splash art. Every miss zooms out and unlocks a hint. Up to 6 guesses.',
+    par: 4,
+    kind: 'procedural',
+    Component: SplashZoomHole,
   },
   {
     id: 'rift-connections',

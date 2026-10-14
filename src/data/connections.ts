@@ -19,6 +19,12 @@ export const GROUPS: ConnectionGroup[] = [...generated.groups, ...CURATED_GROUPS
 /** Skins per champion — a rough stand-in for how often players think of them. */
 export const SKIN_COUNTS: Record<string, number> = generated.skins;
 
+/** A champion's home region ("Ionia", "Shadow Isles"), or "None". */
+export function regionOf(id: string): string {
+  const label = GROUPS.find((g) => g.kind === 'region' && g.members.includes(id))?.label;
+  return label ? label.replace(/^From (the )?/, '') : 'None';
+}
+
 export interface PuzzleGroup {
   group: ConnectionGroup;
   picks: string[]; // the 4 champions shown for this group

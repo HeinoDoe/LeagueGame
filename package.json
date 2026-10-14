@@ -9,7 +9,8 @@
     "fetch-data": "node scripts/fetch-data.mjs",
     "typecheck": "tsc --noEmit",
     "fetch-models": "node scripts/fetch-models.mjs",
-    "fetch-connections": "node scripts/fetch-connections.mjs"
+    "fetch-connections": "node scripts/fetch-connections.mjs",
+    "fetch-proplay": "node scripts/fetch-proplay.mjs"
   },
   "dependencies": {
     "react": "^19.3.0",

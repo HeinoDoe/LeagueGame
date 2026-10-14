@@ -35,6 +35,7 @@ Other commands:
 | `npm run fetch-data` | Save the latest champion/item data into `public/data/` (see below) |
 | `npm run fetch-models` | Re-measure the 3D models for **Size Up** + **Silhouette** (once per patch, see below) |
 | `npm run fetch-connections` | Rebuild the champion groups for **Rift Connections** (once per patch) |
+| `npm run fetch-proplay` | Re-collect the Worlds stats for **Pro Play** + **Big Numbers** (after each Worlds) |
 
 ## 2. Where the data comes from
 
@@ -58,6 +59,11 @@ release dates from Riot's Universe site, skin lines and races from Community
 Dragon, resource types and name/title quirks from Data Dragon. Your own groups
 go in `src/data/curated/connections.ts`.
 
+**Pro Play** and the Worlds questions in **Big Numbers** use real stats from the
+official LoL Esports API: `npm run fetch-proplay` reads every Worlds game since
+2023 (the first year with stats in the live feed) and saves kills, games and
+picks to `src/data/generated/proplay.json`. Re-run it after each Worlds.
+
 **Deep Dive** asks 5 categories a day: 3 champion questions built from the
 Rift Connections groups (rarity = how few skins a champion has, or the list
 order for hand-made groups) and 2 free-text questions about pro play and the
@@ -70,11 +76,11 @@ Worlds/MSI.
 | Hole | Game | Par | Type |
 |---|---|---|---|
 | Redacted Lore | Guess the champion from their bio (name blacked out) | 4 | procedural |
-| Gold Rush | Higher/lower on item gold cost, 5 calls | 4 | procedural |
-| Health Bar | Higher/lower on champion base HP, 5 calls | 4 | procedural |
-| Range Finder | Estimate attack range with a slider | 3 | procedural |
-| Price Check | Estimate an item's total cost with a slider | 3 | procedural |
+| Stat Check | Higher/lower on champion stats — a different stat every round | 4 | procedural |
+| Pro Play | Higher/lower on real Worlds stats: players, champions or teams | 4 | procedural |
+| Big Numbers | Estimate a huge number on a 1-to-a-billion slider (or type it) | 3 | procedural |
 | Silhouette | Guess the champion from their 3D model's shadow; each miss adds light + a hint | 4 | procedural |
+| Splash Zoom | Guess the champion from a zoomed-in piece of splash art | 4 | procedural |
 | Rift Connections | Sort 16 champions into 4 hidden groups (NYT Connections-style) | 4 | procedural |
 | Size Up | Resize a champion's 3D model next to another (Magnitudle-style) | 3 | procedural |
 | Deep Dive | 5 categories, one answer each, rarer = more points (Krillion-style) | 5 | curated |
@@ -108,8 +114,7 @@ src/
   games/
     registry.ts        ← THE LIST OF HOLES — add/remove games here
     guessChampion.tsx  ← engine: guess a champion from a clue (Redacted Lore, Silhouette)
-    higherLower.tsx    ← engine: higher/lower chains
-    estimate.tsx       ← engine: slider estimates
+    higherLower.tsx    ← engine: higher/lower chains (Stat Check, Pro Play)
     sizeUp.tsx, connections.tsx, deepDive.tsx …
   components/          ← scorecard, result card, champion input …
   data/
@@ -128,8 +133,10 @@ scripts/fetch-models.mjs, fetch-connections.mjs ← regenerate src/data/generate
 3. Add it to the `HOLES` list in `src/games/registry.ts`.
 
 Many new holes need no new component at all — the engines are reusable. For
-example a "Move Speed" higher/lower hole is just a new `makeHigherLowerHole({...})`
-entry in the registry.
+example, a new higher/lower hole is just a `makeHigherLowerHole({ setup })` with
+your own list of things to compare (see `src/games/statCheck.tsx`), and a new
+guess-the-champion hole is a `makeGuessChampionHole({ clue })`
+(see `src/games/splashZoom.tsx`).
 
 ## 8. Online + working together
 

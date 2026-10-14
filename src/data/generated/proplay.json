@@ -1,0 +1,1725 @@
+{
+ "span": "2023–2025",
+ "years": {
+  "2023": {
+   "games": 106,
+   "kills": 2624,
+   "gold": 12094613,
+   "final": {
+    "teams": [ "T1", "Weibo Gaming" ],
+    "kills": 60,
+    "gold": 309343 } },
+  "2024": {
+   "games": 106,
+   "kills": 2890,
+   "gold": 12761989,
+   "final": {
+    "teams": [ "Bilibili Gaming", "T1" ],
+    "kills": 104,
+    "gold": 532031 } },
+  "2025": {
+   "games": 79,
+   "kills": 2372,
+   "gold": 9563601,
+   "final": {
+    "teams": [ "T1", "kt Rolster" ],
+    "kills": 166,
+    "gold": 675826 } } },
+ "champions": {
+  "Aatrox": {
+   "2023": 33,
+   "2024": 1,
+   "2025": 4 },
+  "Vi": {
+   "2023": 28,
+   "2024": 27,
+   "2025": 17 },
+  "Ahri": {
+   "2023": 15,
+   "2024": 30,
+   "2025": 1 },
+  "Senna": {
+   "2023": 10,
+   "2024": 1,
+   "2025": 1 },
+  "Maokai": {
+   "2023": 31,
+   "2024": 18,
+   "2025": 2 },
+  "Rumble": {
+   "2023": 22,
+   "2024": 34,
+   "2025": 18 },
+  "Sejuani": {
+   "2023": 24,
+   "2024": 32,
+   "2025": 3 },
+  "Jayce": {
+   "2023": 23,
+   "2024": 2,
+   "2025": 1 },
+  "Draven": {
+   "2023": 4,
+   "2024": 3,
+   "2025": 4 },
+  "Nautilus": {
+   "2023": 22,
+   "2024": 12,
+   "2025": 11 },
+  "Kaisa": {
+   "2023": 55,
+   "2024": 31,
+   "2025": 16 },
+  "Blitzcrank": {
+   "2023": 6,
+   "2024": 1,
+   "2025": 1 },
+  "JarvanIV": {
+   "2023": 39,
+   "2024": 7,
+   "2025": 20 },
+  "Akali": {
+   "2023": 13,
+   "2024": 13,
+   "2025": 6 },
+  "Xayah": {
+   "2023": 42,
+   "2024": 15,
+   "2025": 11 },
+  "Rakan": {
+   "2023": 42,
+   "2024": 26,
+   "2025": 21 },
+  "Darius": {
+   "2023": 2,
+   "2024": 1 },
+  "Rell": {
+   "2023": 50,
+   "2024": 54,
+   "2025": 8 },
+  "Syndra": {
+   "2023": 24,
+   "2024": 13,
+   "2025": 2 },
+  "Ezreal": {
+   "2023": 8,
+   "2024": 30,
+   "2025": 14 },
+  "Alistar": {
+   "2023": 32,
+   "2024": 20,
+   "2025": 24 },
+  "Renekton": {
+   "2023": 35,
+   "2024": 26,
+   "2025": 12 },
+  "Viego": {
+   "2023": 11,
+   "2024": 3,
+   "2025": 2 },
+  "Neeko": {
+   "2023": 21,
+   "2024": 10,
+   "2025": 19 },
+  "Taliyah": {
+   "2023": 20,
+   "2025": 23 },
+  "Braum": {
+   "2023": 5,
+   "2024": 15,
+   "2025": 16 },
+  "KSante": {
+   "2023": 37,
+   "2024": 21,
+   "2025": 26 },
+  "LeeSin": {
+   "2023": 22,
+   "2024": 4 },
+  "Leblanc": {
+   "2023": 4,
+   "2024": 7,
+   "2025": 5 },
+  "Gragas": {
+   "2023": 3,
+   "2024": 5,
+   "2025": 1 },
+  "Gnar": {
+   "2023": 12,
+   "2024": 37,
+   "2025": 1 },
+  "Sivir": {
+   "2023": 7,
+   "2025": 12 },
+  "Malphite": {
+   "2023": 2 },
+  "Khazix": {
+   "2023": 2 },
+  "Kennen": {
+   "2023": 4,
+   "2024": 3 },
+  "Orianna": {
+   "2023": 38,
+   "2024": 24,
+   "2025": 20 },
+  "Kalista": {
+   "2023": 18,
+   "2024": 21,
+   "2025": 2 },
+  "Aphelios": {
+   "2023": 25 },
+  "Gwen": {
+   "2023": 6,
+   "2025": 1 },
+  "Azir": {
+   "2023": 32,
+   "2025": 14 },
+  "Sylas": {
+   "2023": 15,
+   "2024": 19,
+   "2025": 5 },
+  "MonkeyKing": {
+   "2023": 9,
+   "2024": 15,
+   "2025": 21 },
+  "Jax": {
+   "2023": 30,
+   "2024": 42,
+   "2025": 5 },
+  "Ivern": {
+   "2023": 4,
+   "2024": 4,
+   "2025": 1 },
+  "Cassiopeia": {
+   "2023": 3,
+   "2024": 3,
+   "2025": 7 },
+  "Poppy": {
+   "2023": 9,
+   "2024": 25,
+   "2025": 12 },
+  "Tristana": {
+   "2023": 7,
+   "2024": 13 },
+  "Nocturne": {
+   "2023": 4,
+   "2024": 23,
+   "2025": 5 },
+  "Viktor": {
+   "2023": 2,
+   "2025": 6 },
+  "Olaf": {
+   "2023": 5,
+   "2024": 3 },
+  "Sett": {
+   "2023": 3,
+   "2024": 1 },
+  "Taric": {
+   "2023": 1,
+   "2024": 1 },
+  "Leona": {
+   "2023": 6,
+   "2024": 29,
+   "2025": 15 },
+  "Sion": {
+   "2023": 1,
+   "2024": 2,
+   "2025": 21 },
+  "Zeri": {
+   "2023": 13,
+   "2024": 2,
+   "2025": 1 },
+  "Caitlyn": {
+   "2023": 9,
+   "2024": 4,
+   "2025": 16 },
+  "Garen": {
+   "2023": 2 },
+  "Ashe": {
+   "2023": 10,
+   "2024": 26,
+   "2025": 4 },
+  "Renata": {
+   "2023": 17,
+   "2024": 17,
+   "2025": 4 },
+  "Ornn": {
+   "2023": 5,
+   "2024": 1,
+   "2025": 11 },
+  "Varus": {
+   "2023": 8,
+   "2024": 8,
+   "2025": 13 },
+  "Zac": {
+   "2023": 1 },
+  "TahmKench": {
+   "2023": 9,
+   "2024": 1,
+   "2025": 1 },
+  "Belveth": {
+   "2023": 6 },
+  "Lissandra": {
+   "2023": 3 },
+  "Yone": {
+   "2023": 6,
+   "2024": 36,
+   "2025": 4 },
+  "Vex": {
+   "2023": 1,
+   "2024": 2 },
+  "Ziggs": {
+   "2023": 1,
+   "2024": 14,
+   "2025": 10 },
+  "Lulu": {
+   "2023": 4,
+   "2024": 1,
+   "2025": 4 },
+  "Camille": {
+   "2023": 1,
+   "2024": 5,
+   "2025": 3 },
+  "Lucian": {
+   "2023": 1,
+   "2024": 11,
+   "2025": 9 },
+  "Bard": {
+   "2023": 6,
+   "2024": 2,
+   "2025": 11 },
+  "Nilah": {
+   "2023": 2 },
+  "Thresh": {
+   "2023": 1,
+   "2025": 1 },
+  "Kindred": {
+   "2023": 1,
+   "2024": 3 },
+  "Lux": {
+   "2023": 4,
+   "2024": 1 },
+  "Volibear": {
+   "2023": 1 },
+  "Soraka": {
+   "2023": 1,
+   "2025": 1 },
+  "Jinx": {
+   "2023": 3,
+   "2024": 5 },
+  "Nidalee": {
+   "2023": 1,
+   "2024": 6,
+   "2025": 1 },
+  "Ryze": {
+   "2023": 1,
+   "2024": 1,
+   "2025": 22 },
+  "Milio": {
+   "2023": 7 },
+  "KogMaw": {
+   "2023": 1 },
+  "Karma": {
+   "2023": 1,
+   "2025": 6 },
+  "Heimerdinger": {
+   "2023": 2 },
+  "Graves": {
+   "2023": 1 },
+  "Quinn": {
+   "2023": 1 },
+  "Jhin": {
+   "2023": 1,
+   "2024": 28,
+   "2025": 4 },
+  "Skarner": {
+   "2024": 39,
+   "2025": 3 },
+  "MissFortune": {
+   "2024": 16,
+   "2025": 3 },
+  "Nami": {
+   "2024": 6,
+   "2025": 5 },
+  "Vayne": {
+   "2024": 1,
+   "2025": 2 },
+  "Aurora": {
+   "2024": 19,
+   "2025": 16 },
+  "Shyvana": {
+   "2024": 3 },
+  "Hwei": {
+   "2024": 4,
+   "2025": 4 },
+  "Brand": {
+   "2024": 6 },
+  "Udyr": {
+   "2024": 2 },
+  "Corki": {
+   "2024": 1,
+   "2025": 22 },
+  "Smolder": {
+   "2024": 16,
+   "2025": 4 },
+  "RekSai": {
+   "2024": 1,
+   "2025": 15 },
+  "Lillia": {
+   "2024": 2 },
+  "Zyra": {
+   "2024": 3 },
+  "Yasuo": {
+   "2024": 3 },
+  "Amumu": {
+   "2024": 3 },
+  "Galio": {
+   "2024": 11,
+   "2025": 12 },
+  "Twitch": {
+   "2024": 1 },
+  "XinZhao": {
+   "2024": 9,
+   "2025": 28 },
+  "Urgot": {
+   "2024": 2 },
+  "Nunu": {
+   "2024": 2 },
+  "Swain": {
+   "2024": 1,
+   "2025": 1 },
+  "Morgana": {
+   "2024": 1,
+   "2025": 1 },
+  "Kled": {
+   "2024": 1,
+   "2025": 1 },
+  "Pyke": {
+   "2024": 2 },
+  "Seraphine": {
+   "2024": 1 },
+  "Kassadin": {
+   "2024": 1,
+   "2025": 1 },
+  "FiddleSticks": {
+   "2024": 1 },
+  "Elise": {
+   "2024": 1,
+   "2025": 1 },
+  "Qiyana": {
+   "2025": 16 },
+  "Ambessa": {
+   "2025": 18 },
+  "Trundle": {
+   "2025": 17 },
+  "Annie": {
+   "2025": 4 },
+  "Yunara": {
+   "2025": 15 },
+  "Pantheon": {
+   "2025": 11 },
+  "Mordekaiser": {
+   "2025": 8 },
+  "Naafiri": {
+   "2025": 5 },
+  "Yorick": {
+   "2025": 3 },
+  "Zed": {
+   "2025": 1 },
+  "Anivia": {
+   "2025": 3 },
+  "DrMundo": {
+   "2025": 4 },
+  "Zoe": {
+   "2025": 1 },
+  "Mel": {
+   "2025": 2 } },
+ "players": {
+  "369": {
+   "team": "TES",
+   "games": 37,
+   "kills": 95,
+   "deaths": 101,
+   "assists": 189 },
+  "apaMEN": {
+   "team": "DFM",
+   "games": 4,
+   "kills": 1,
+   "deaths": 14,
+   "assists": 6 },
+  "Steal": {
+   "team": "DFM",
+   "games": 4,
+   "kills": 5,
+   "deaths": 17,
+   "assists": 12 },
+  "Aria": {
+   "team": "DFM",
+   "games": 4,
+   "kills": 11,
+   "deaths": 13,
+   "assists": 8 },
+  "Yutapon": {
+   "team": "DFM",
+   "games": 4,
+   "kills": 6,
+   "deaths": 10,
+   "assists": 12 },
+  "Harp": {
+   "team": "DFM",
+   "games": 4,
+   "kills": 0,
+   "deaths": 13,
+   "assists": 19 },
+  "Rest": {
+   "team": "CFO",
+   "games": 14,
+   "kills": 31,
+   "deaths": 35,
+   "assists": 63 },
+  "Gemini": {
+   "team": "CFO",
+   "games": 7,
+   "kills": 13,
+   "deaths": 18,
+   "assists": 65 },
+  "JimieN": {
+   "team": "CFO",
+   "games": 7,
+   "kills": 27,
+   "deaths": 16,
+   "assists": 45 },
+  "Shunn": {
+   "team": "CFO",
+   "games": 7,
+   "kills": 34,
+   "deaths": 17,
+   "assists": 40 },
+  "ShiauC": {
+   "team": "CFO",
+   "games": 7,
+   "kills": 7,
+   "deaths": 26,
+   "assists": 70 },
+  "Adam": {
+   "team": "BDS",
+   "games": 16,
+   "kills": 46,
+   "deaths": 42,
+   "assists": 58 },
+  "Sheo": {
+   "team": "BDS",
+   "games": 16,
+   "kills": 20,
+   "deaths": 35,
+   "assists": 123 },
+  "nuc": {
+   "team": "BDS",
+   "games": 16,
+   "kills": 55,
+   "deaths": 44,
+   "assists": 68 },
+  "Crownie": {
+   "team": "BDS",
+   "games": 16,
+   "kills": 61,
+   "deaths": 29,
+   "assists": 69 },
+  "Labrov": {
+   "team": "G2",
+   "games": 26,
+   "kills": 8,
+   "deaths": 71,
+   "assists": 230 },
+  "Sparda": {
+   "team": "TW",
+   "games": 10,
+   "kills": 23,
+   "deaths": 29,
+   "assists": 63 },
+  "BeanJ": {
+   "team": "TW",
+   "games": 10,
+   "kills": 35,
+   "deaths": 34,
+   "assists": 63 },
+  "Gloryy": {
+   "team": "TW",
+   "games": 10,
+   "kills": 32,
+   "deaths": 27,
+   "assists": 48 },
+  "Artemis": {
+   "team": "TW",
+   "games": 10,
+   "kills": 37,
+   "deaths": 20,
+   "assists": 58 },
+  "Bie": {
+   "team": "VKE",
+   "games": 14,
+   "kills": 9,
+   "deaths": 41,
+   "assists": 112 },
+  "Azhi": {
+   "team": "PSG",
+   "games": 24,
+   "kills": 64,
+   "deaths": 64,
+   "assists": 135 },
+  "JunJia": {
+   "team": "CFO",
+   "games": 32,
+   "kills": 84,
+   "deaths": 94,
+   "assists": 249 },
+  "Maple": {
+   "team": "PSG",
+   "games": 24,
+   "kills": 94,
+   "deaths": 65,
+   "assists": 110 },
+  "Wako": {
+   "team": "PSG",
+   "games": 7,
+   "kills": 34,
+   "deaths": 14,
+   "assists": 26 },
+  "Woody": {
+   "team": "PSG",
+   "games": 24,
+   "kills": 15,
+   "deaths": 74,
+   "assists": 243 },
+  "Robo": {
+   "team": "LLL",
+   "games": 4,
+   "kills": 8,
+   "deaths": 22,
+   "assists": 8 },
+  "Croc": {
+   "team": "LLL",
+   "games": 4,
+   "kills": 6,
+   "deaths": 26,
+   "assists": 14 },
+  "tinowns": {
+   "team": "LLL",
+   "games": 4,
+   "kills": 5,
+   "deaths": 13,
+   "assists": 11 },
+  "Route": {
+   "team": "LLL",
+   "games": 4,
+   "kills": 9,
+   "deaths": 10,
+   "assists": 10 },
+  "Ceos": {
+   "team": "LLL",
+   "games": 4,
+   "kills": 1,
+   "deaths": 20,
+   "assists": 17 },
+  "Bong": {
+   "team": "R7",
+   "games": 2,
+   "kills": 2,
+   "deaths": 13,
+   "assists": 4 },
+  "Oddie": {
+   "team": "R7",
+   "games": 10,
+   "kills": 16,
+   "deaths": 36,
+   "assists": 81 },
+  "Mireu": {
+   "team": "VKS",
+   "games": 8,
+   "kills": 33,
+   "deaths": 26,
+   "assists": 40 },
+  "Ceo": {
+   "team": "R7",
+   "games": 10,
+   "kills": 43,
+   "deaths": 31,
+   "assists": 45 },
+  "Lyonz": {
+   "team": "R7",
+   "games": 10,
+   "kills": 6,
+   "deaths": 35,
+   "assists": 97 },
+  "Kiaya": {
+   "team": "GAM",
+   "games": 27,
+   "kills": 90,
+   "deaths": 69,
+   "assists": 147 },
+  "Levi": {
+   "team": "GAM",
+   "games": 27,
+   "kills": 70,
+   "deaths": 73,
+   "assists": 208 },
+  "Kati": {
+   "team": "VKE",
+   "games": 19,
+   "kills": 67,
+   "deaths": 58,
+   "assists": 108 },
+  "Slayder": {
+   "team": "GAM",
+   "games": 15,
+   "kills": 73,
+   "deaths": 22,
+   "assists": 60 },
+  "Palette": {
+   "team": "GAM",
+   "games": 15,
+   "kills": 11,
+   "deaths": 31,
+   "assists": 138 },
+  "Zeus": {
+   "team": "HLE",
+   "games": 39,
+   "kills": 131,
+   "deaths": 83,
+   "assists": 220 },
+  "Oner": {
+   "team": "T1",
+   "games": 54,
+   "kills": 189,
+   "deaths": 117,
+   "assists": 459 },
+  "Faker": {
+   "team": "T1",
+   "games": 54,
+   "kills": 208,
+   "deaths": 110,
+   "assists": 377 },
+  "Gumayusi": {
+   "team": "T1",
+   "games": 54,
+   "kills": 253,
+   "deaths": 101,
+   "assists": 330 },
+  "Keria": {
+   "team": "T1",
+   "games": 54,
+   "kills": 43,
+   "deaths": 118,
+   "assists": 607 },
+  "Summit": {
+   "team": "R7",
+   "games": 13,
+   "kills": 22,
+   "deaths": 41,
+   "assists": 61 },
+  "Pyosik": {
+   "team": "TL",
+   "games": 5,
+   "kills": 14,
+   "deaths": 8,
+   "assists": 17 },
+  "APA": {
+   "team": "TL",
+   "games": 15,
+   "kills": 49,
+   "deaths": 55,
+   "assists": 51 },
+  "Yeon": {
+   "team": "TL",
+   "games": 15,
+   "kills": 45,
+   "deaths": 30,
+   "assists": 62 },
+  "CoreJJ": {
+   "team": "TL",
+   "games": 15,
+   "kills": 11,
+   "deaths": 47,
+   "assists": 115 },
+  "Fudge": {
+   "team": "C9",
+   "games": 6,
+   "kills": 18,
+   "deaths": 20,
+   "assists": 23 },
+  "Blaber": {
+   "team": "C9",
+   "games": 6,
+   "kills": 15,
+   "deaths": 16,
+   "assists": 42 },
+  "EMENES": {
+   "team": "C9",
+   "games": 6,
+   "kills": 15,
+   "deaths": 14,
+   "assists": 24 },
+  "Berserker": {
+   "team": "C9",
+   "games": 6,
+   "kills": 19,
+   "deaths": 10,
+   "assists": 16 },
+  "Zven": {
+   "team": "C9",
+   "games": 6,
+   "kills": 3,
+   "deaths": 24,
+   "assists": 36 },
+  "Chasy": {
+   "team": "MAD",
+   "games": 5,
+   "kills": 15,
+   "deaths": 16,
+   "assists": 22 },
+  "Elyoya": {
+   "team": "MKOI",
+   "games": 25,
+   "kills": 83,
+   "deaths": 64,
+   "assists": 180 },
+  "Nisqy": {
+   "team": "MAD",
+   "games": 5,
+   "kills": 15,
+   "deaths": 11,
+   "assists": 30 },
+  "Carzzy": {
+   "team": "MAD",
+   "games": 5,
+   "kills": 21,
+   "deaths": 14,
+   "assists": 17 },
+  "Hylissang": {
+   "team": "MAD",
+   "games": 5,
+   "kills": 2,
+   "deaths": 26,
+   "assists": 37 },
+  "Doran": {
+   "team": "T1",
+   "games": 43,
+   "kills": 124,
+   "deaths": 127,
+   "assists": 316 },
+  "Peanut": {
+   "team": "HLE",
+   "games": 28,
+   "kills": 51,
+   "deaths": 81,
+   "assists": 263 },
+  "Chovy": {
+   "team": "GEN",
+   "games": 35,
+   "kills": 144,
+   "deaths": 61,
+   "assists": 239 },
+  "Peyz": {
+   "team": "GEN",
+   "games": 23,
+   "kills": 100,
+   "deaths": 29,
+   "assists": 127 },
+  "Delight": {
+   "team": "HLE",
+   "games": 28,
+   "kills": 17,
+   "deaths": 84,
+   "assists": 295 },
+  "Kanavi": {
+   "team": "TES",
+   "games": 29,
+   "kills": 90,
+   "deaths": 94,
+   "assists": 178 },
+  "knight": {
+   "team": "BLG",
+   "games": 33,
+   "kills": 126,
+   "deaths": 66,
+   "assists": 216 },
+  "Ruler": {
+   "team": "GEN",
+   "games": 25,
+   "kills": 132,
+   "deaths": 40,
+   "assists": 144 },
+  "MISSING": {
+   "team": "JDG",
+   "games": 13,
+   "kills": 10,
+   "deaths": 24,
+   "assists": 112 },
+  "BrokenBlade": {
+   "team": "G2",
+   "games": 27,
+   "kills": 62,
+   "deaths": 72,
+   "assists": 135 },
+  "Yike": {
+   "team": "G2",
+   "games": 17,
+   "kills": 38,
+   "deaths": 50,
+   "assists": 116 },
+  "Caps": {
+   "team": "G2",
+   "games": 27,
+   "kills": 73,
+   "deaths": 88,
+   "assists": 155 },
+  "Hans Sama": {
+   "team": "G2",
+   "games": 27,
+   "kills": 106,
+   "deaths": 80,
+   "assists": 119 },
+  "Mikyx": {
+   "team": "FNC",
+   "games": 22,
+   "kills": 15,
+   "deaths": 113,
+   "assists": 168 },
+  "Canna": {
+   "team": "DK",
+   "games": 8,
+   "kills": 17,
+   "deaths": 19,
+   "assists": 41 },
+  "Canyon": {
+   "team": "GEN",
+   "games": 34,
+   "kills": 78,
+   "deaths": 69,
+   "assists": 277 },
+  "ShowMaker": {
+   "team": "DK",
+   "games": 17,
+   "kills": 52,
+   "deaths": 34,
+   "assists": 89 },
+  "Deft": {
+   "team": "DK",
+   "games": 8,
+   "kills": 33,
+   "deaths": 15,
+   "assists": 35 },
+  "Kellin": {
+   "team": "DK",
+   "games": 8,
+   "kills": 5,
+   "deaths": 20,
+   "assists": 65 },
+  "TheShy": {
+   "team": "IG",
+   "games": 23,
+   "kills": 63,
+   "deaths": 85,
+   "assists": 94 },
+  "Weiwei": {
+   "team": "LNG",
+   "games": 27,
+   "kills": 47,
+   "deaths": 75,
+   "assists": 221 },
+  "Xiaohu": {
+   "team": "WBG",
+   "games": 35,
+   "kills": 126,
+   "deaths": 82,
+   "assists": 219 },
+  "Light": {
+   "team": "WBG",
+   "games": 35,
+   "kills": 159,
+   "deaths": 60,
+   "assists": 167 },
+  "Crisp": {
+   "team": "WBG",
+   "games": 35,
+   "kills": 22,
+   "deaths": 100,
+   "assists": 338 },
+  "Dhokla": {
+   "team": "100T",
+   "games": 13,
+   "kills": 35,
+   "deaths": 39,
+   "assists": 62 },
+  "Contractz": {
+   "team": "NRG",
+   "games": 8,
+   "kills": 25,
+   "deaths": 19,
+   "assists": 51 },
+  "Palafox": {
+   "team": "NRG",
+   "games": 8,
+   "kills": 29,
+   "deaths": 21,
+   "assists": 55 },
+  "FBI": {
+   "team": "100T",
+   "games": 13,
+   "kills": 50,
+   "deaths": 32,
+   "assists": 65 },
+  "IgNar": {
+   "team": "NRG",
+   "games": 8,
+   "kills": 3,
+   "deaths": 19,
+   "assists": 74 },
+  "Zika": {
+   "team": "LNG",
+   "games": 19,
+   "kills": 53,
+   "deaths": 48,
+   "assists": 87 },
+  "Tarzan": {
+   "team": "AL",
+   "games": 34,
+   "kills": 59,
+   "deaths": 95,
+   "assists": 275 },
+  "Scout": {
+   "team": "LNG",
+   "games": 19,
+   "kills": 70,
+   "deaths": 29,
+   "assists": 102 },
+  "GALA": {
+   "team": "IG",
+   "games": 23,
+   "kills": 86,
+   "deaths": 42,
+   "assists": 115 },
+  "Hang": {
+   "team": "TES",
+   "games": 35,
+   "kills": 14,
+   "deaths": 123,
+   "assists": 314 },
+  "Oscarinin": {
+   "team": "FNC",
+   "games": 20,
+   "kills": 44,
+   "deaths": 71,
+   "assists": 79 },
+  "Razork": {
+   "team": "FNC",
+   "games": 20,
+   "kills": 41,
+   "deaths": 68,
+   "assists": 140 },
+  "Humanoid": {
+   "team": "FNC",
+   "games": 15,
+   "kills": 35,
+   "deaths": 50,
+   "assists": 82 },
+  "Noah": {
+   "team": "FNC",
+   "games": 15,
+   "kills": 65,
+   "deaths": 25,
+   "assists": 64 },
+  "Trymbi": {
+   "team": "VKS",
+   "games": 15,
+   "kills": 13,
+   "deaths": 59,
+   "assists": 146 },
+  "Bin": {
+   "team": "BLG",
+   "games": 46,
+   "kills": 155,
+   "deaths": 108,
+   "assists": 198 },
+  "XUN": {
+   "team": "BLG",
+   "games": 35,
+   "kills": 85,
+   "deaths": 74,
+   "assists": 284 },
+  "Yagao": {
+   "team": "BLG",
+   "games": 18,
+   "kills": 51,
+   "deaths": 45,
+   "assists": 108 },
+  "Elk": {
+   "team": "BLG",
+   "games": 46,
+   "kills": 187,
+   "deaths": 112,
+   "assists": 272 },
+  "0N": {
+   "team": "BLG",
+   "games": 1,
+   "kills": 0,
+   "deaths": 2,
+   "assists": 17 },
+  "Kiin": {
+   "team": "GEN",
+   "games": 38,
+   "kills": 98,
+   "deaths": 103,
+   "assists": 225 },
+  "Cuzz": {
+   "team": "KT",
+   "games": 28,
+   "kills": 85,
+   "deaths": 61,
+   "assists": 226 },
+  "Bdd": {
+   "team": "KT",
+   "games": 28,
+   "kills": 115,
+   "deaths": 61,
+   "assists": 204 },
+  "Aiming": {
+   "team": "DK",
+   "games": 21,
+   "kills": 113,
+   "deaths": 36,
+   "assists": 95 },
+  "Lehends": {
+   "team": "GEN",
+   "games": 26,
+   "kills": 10,
+   "deaths": 85,
+   "assists": 217 },
+  "ON": {
+   "team": "BLG",
+   "games": 45,
+   "kills": 28,
+   "deaths": 143,
+   "assists": 414 },
+  "Myrwn": {
+   "team": "MKOI",
+   "games": 20,
+   "kills": 32,
+   "deaths": 61,
+   "assists": 104 },
+  "Fresskowy": {
+   "team": "MDK",
+   "games": 10,
+   "kills": 27,
+   "deaths": 34,
+   "assists": 38 },
+  "Supa": {
+   "team": "MKOI",
+   "games": 20,
+   "kills": 101,
+   "deaths": 55,
+   "assists": 100 },
+  "Alvaro": {
+   "team": "MKOI",
+   "games": 20,
+   "kills": 9,
+   "deaths": 67,
+   "assists": 205 },
+  "Nanaue": {
+   "team": "VKE",
+   "games": 4,
+   "kills": 10,
+   "deaths": 19,
+   "assists": 10 },
+  "Gury": {
+   "team": "VKE",
+   "games": 4,
+   "kills": 4,
+   "deaths": 13,
+   "assists": 24 },
+  "Shogun": {
+   "team": "VKE",
+   "games": 4,
+   "kills": 7,
+   "deaths": 13,
+   "assists": 14 },
+  "Betty": {
+   "team": "PSG",
+   "games": 17,
+   "kills": 68,
+   "deaths": 38,
+   "assists": 80 },
+  "Wizer": {
+   "team": "PNG",
+   "games": 12,
+   "kills": 48,
+   "deaths": 33,
+   "assists": 41 },
+  "CarioK": {
+   "team": "PNG",
+   "games": 12,
+   "kills": 13,
+   "deaths": 42,
+   "assists": 95 },
+  "dyNquedo": {
+   "team": "PNG",
+   "games": 12,
+   "kills": 42,
+   "deaths": 33,
+   "assists": 57 },
+  "TitaN": {
+   "team": "PNG",
+   "games": 12,
+   "kills": 40,
+   "deaths": 28,
+   "assists": 65 },
+  "Kuri": {
+   "team": "PNG",
+   "games": 12,
+   "kills": 4,
+   "deaths": 38,
+   "assists": 107 },
+  "Emo": {
+   "team": "GAM",
+   "games": 12,
+   "kills": 36,
+   "deaths": 23,
+   "assists": 53 },
+  "Easylove": {
+   "team": "GAM",
+   "games": 12,
+   "kills": 46,
+   "deaths": 25,
+   "assists": 63 },
+  "Elio": {
+   "team": "GAM",
+   "games": 12,
+   "kills": 6,
+   "deaths": 36,
+   "assists": 109 },
+  "Evi": {
+   "team": "SHG",
+   "games": 4,
+   "kills": 6,
+   "deaths": 15,
+   "assists": 16 },
+  "Forest": {
+   "team": "SHG",
+   "games": 4,
+   "kills": 8,
+   "deaths": 25,
+   "assists": 16 },
+  "DasheR": {
+   "team": "SHG",
+   "games": 4,
+   "kills": 11,
+   "deaths": 15,
+   "assists": 10 },
+  "Marble": {
+   "team": "SHG",
+   "games": 4,
+   "kills": 7,
+   "deaths": 14,
+   "assists": 13 },
+  "Vsta": {
+   "team": "SHG",
+   "games": 4,
+   "kills": 5,
+   "deaths": 16,
+   "assists": 19 },
+  "Sniper": {
+   "team": "100",
+   "games": 7,
+   "kills": 24,
+   "deaths": 22,
+   "assists": 35 },
+  "River": {
+   "team": "100T",
+   "games": 12,
+   "kills": 31,
+   "deaths": 50,
+   "assists": 80 },
+  "Quid": {
+   "team": "100T",
+   "games": 12,
+   "kills": 52,
+   "deaths": 40,
+   "assists": 67 },
+  "Tomo": {
+   "team": "100",
+   "games": 7,
+   "kills": 32,
+   "deaths": 19,
+   "assists": 44 },
+  "Eyla": {
+   "team": "100T",
+   "games": 12,
+   "kills": 7,
+   "deaths": 54,
+   "assists": 117 },
+  "Keine": {
+   "team": "R7",
+   "games": 8,
+   "kills": 42,
+   "deaths": 21,
+   "assists": 51 },
+  "Wei": {
+   "team": "IG",
+   "games": 7,
+   "kills": 18,
+   "deaths": 30,
+   "assists": 60 },
+  "Tian": {
+   "team": "TES",
+   "games": 8,
+   "kills": 16,
+   "deaths": 18,
+   "assists": 63 },
+  "Creme": {
+   "team": "TES",
+   "games": 24,
+   "kills": 74,
+   "deaths": 67,
+   "assists": 130 },
+  "JackeyLove": {
+   "team": "TES",
+   "games": 24,
+   "kills": 92,
+   "deaths": 72,
+   "assists": 130 },
+  "Meiko": {
+   "team": "IG",
+   "games": 12,
+   "kills": 5,
+   "deaths": 48,
+   "assists": 113 },
+  "Breathe": {
+   "team": "WBG",
+   "games": 16,
+   "kills": 61,
+   "deaths": 44,
+   "assists": 85 },
+  "Jun": {
+   "team": "FNC",
+   "games": 6,
+   "kills": 4,
+   "deaths": 19,
+   "assists": 51 },
+  "Kingen": {
+   "team": "DK",
+   "games": 9,
+   "kills": 15,
+   "deaths": 32,
+   "assists": 42 },
+  "Lucid": {
+   "team": "DK",
+   "games": 9,
+   "kills": 17,
+   "deaths": 41,
+   "assists": 54 },
+  "Moham": {
+   "team": "DK",
+   "games": 9,
+   "kills": 4,
+   "deaths": 46,
+   "assists": 83 },
+  "Impact": {
+   "team": "TL",
+   "games": 10,
+   "kills": 25,
+   "deaths": 29,
+   "assists": 47 },
+  "UmTi": {
+   "team": "TL",
+   "games": 10,
+   "kills": 24,
+   "deaths": 24,
+   "assists": 66 },
+  "Zeka": {
+   "team": "HLE",
+   "games": 19,
+   "kills": 72,
+   "deaths": 50,
+   "assists": 123 },
+  "Viper": {
+   "team": "HLE",
+   "games": 19,
+   "kills": 109,
+   "deaths": 40,
+   "assists": 102 },
+  "Bwipo": {
+   "team": "FLY",
+   "games": 22,
+   "kills": 51,
+   "deaths": 85,
+   "assists": 103 },
+  "Inspired": {
+   "team": "FLY",
+   "games": 22,
+   "kills": 43,
+   "deaths": 51,
+   "assists": 160 },
+  "Quad": {
+   "team": "FLY",
+   "games": 22,
+   "kills": 82,
+   "deaths": 48,
+   "assists": 113 },
+  "Massu": {
+   "team": "FLY",
+   "games": 22,
+   "kills": 79,
+   "deaths": 46,
+   "assists": 120 },
+  "Busio": {
+   "team": "FLY",
+   "games": 22,
+   "kills": 21,
+   "deaths": 62,
+   "assists": 181 },
+  "Rookie": {
+   "team": "IG",
+   "games": 4,
+   "kills": 18,
+   "deaths": 11,
+   "assists": 30 },
+  "Hiro02": {
+   "team": "TSW",
+   "games": 4,
+   "kills": 7,
+   "deaths": 16,
+   "assists": 20 },
+  "Hizto": {
+   "team": "TSW",
+   "games": 6,
+   "kills": 21,
+   "deaths": 19,
+   "assists": 37 },
+  "Dire": {
+   "team": "TSW",
+   "games": 6,
+   "kills": 15,
+   "deaths": 19,
+   "assists": 36 },
+  "Eddie": {
+   "team": "TSW",
+   "games": 6,
+   "kills": 25,
+   "deaths": 15,
+   "assists": 34 },
+  "Taki": {
+   "team": "TSW",
+   "games": 6,
+   "kills": 4,
+   "deaths": 18,
+   "assists": 55 },
+  "Boal": {
+   "team": "VKS",
+   "games": 6,
+   "kills": 17,
+   "deaths": 11,
+   "assists": 30 },
+  "Disamis": {
+   "team": "VKS",
+   "games": 6,
+   "kills": 13,
+   "deaths": 25,
+   "assists": 43 },
+  "Morttheus": {
+   "team": "VKS",
+   "games": 6,
+   "kills": 30,
+   "deaths": 23,
+   "assists": 34 },
+  "Driver": {
+   "team": "CFO",
+   "games": 5,
+   "kills": 12,
+   "deaths": 16,
+   "assists": 41 },
+  "HongQ": {
+   "team": "CFO",
+   "games": 12,
+   "kills": 39,
+   "deaths": 51,
+   "assists": 83 },
+  "Doggo": {
+   "team": "CFO",
+   "games": 12,
+   "kills": 60,
+   "deaths": 26,
+   "assists": 72 },
+  "Kaiwing": {
+   "team": "CFO",
+   "games": 12,
+   "kills": 9,
+   "deaths": 27,
+   "assists": 125 },
+  "Poby": {
+   "team": "FNC",
+   "games": 5,
+   "kills": 8,
+   "deaths": 10,
+   "assists": 14 },
+  "Upset": {
+   "team": "FNC",
+   "games": 5,
+   "kills": 18,
+   "deaths": 7,
+   "assists": 15 },
+  "PerfecT": {
+   "team": "KT",
+   "games": 16,
+   "kills": 37,
+   "deaths": 32,
+   "assists": 125 },
+  "deokdam": {
+   "team": "KT",
+   "games": 16,
+   "kills": 86,
+   "deaths": 43,
+   "assists": 120 },
+  "Peter": {
+   "team": "KT",
+   "games": 16,
+   "kills": 12,
+   "deaths": 58,
+   "assists": 204 },
+  "Jojopyun": {
+   "team": "MKOI",
+   "games": 10,
+   "kills": 33,
+   "deaths": 29,
+   "assists": 59 },
+  "Beichuan": {
+   "team": "BLG",
+   "games": 2,
+   "kills": 4,
+   "deaths": 11,
+   "assists": 17 },
+  "Knight": {
+   "team": "BLG",
+   "games": 8,
+   "kills": 33,
+   "deaths": 19,
+   "assists": 51 },
+  "SkewMond": {
+   "team": "G2",
+   "games": 10,
+   "kills": 31,
+   "deaths": 24,
+   "assists": 56 },
+  "Duro": {
+   "team": "GEN",
+   "games": 12,
+   "kills": 5,
+   "deaths": 43,
+   "assists": 165 },
+  "Karsa": {
+   "team": "PSG",
+   "games": 4,
+   "kills": 7,
+   "deaths": 21,
+   "assists": 13 },
+  "Flandre": {
+   "team": "AL",
+   "games": 7,
+   "kills": 21,
+   "deaths": 19,
+   "assists": 31 },
+  "Shanks": {
+   "team": "AL",
+   "games": 7,
+   "kills": 28,
+   "deaths": 17,
+   "assists": 43 },
+  "Hope": {
+   "team": "AL",
+   "games": 7,
+   "kills": 20,
+   "deaths": 19,
+   "assists": 42 },
+  "Kael": {
+   "team": "AL",
+   "games": 7,
+   "kills": 5,
+   "deaths": 25,
+   "assists": 71 },
+  "Shad0w": {
+   "team": "BLG",
+   "games": 6,
+   "kills": 17,
+   "deaths": 14,
+   "assists": 46 },
+  "Pun": {
+   "team": "TSW",
+   "games": 2,
+   "kills": 6,
+   "deaths": 6,
+   "assists": 7 } },
+ "teams": {
+  "Ctbc Flying Oyster": {
+   "code": "CFO",
+   "image": "https://static.lolesports.com/teams/1656307849320_CFO_Logo.png",
+   "games": 19,
+   "wins": 8 },
+  "Detonatio N Focus Me": {
+   "code": "DFM",
+   "image": "https://static.lolesports.com/teams/1673415140442_dfm.png",
+   "games": 4,
+   "wins": 0 },
+  "Team Whales": {
+   "code": "TW",
+   "image": "https://static.lolesports.com/teams/1674646643550_TEAMWHALE_LOGO_VERSIONS_W_fullwhite-06-svg.png",
+   "games": 10,
+   "wins": 5 },
+  "Shifters": {
+   "code": "SHFT",
+   "image": "https://static.lolesports.com/teams/1765897071435_600px-Shifters_allmode.png",
+   "games": 16,
+   "wins": 8 },
+  "Loud": {
+   "code": "LOUD",
+   "image": "https://static.lolesports.com/teams/Logo-LOUD-Esports_Original.png",
+   "games": 4,
+   "wins": 0 },
+  "PSG Talon": {
+   "code": "PSG",
+   "image": "https://static.lolesports.com/teams/1752559016251_PSG_TALON_COLOR.png",
+   "games": 25,
+   "wins": 11 },
+  "GAM Esports": {
+   "code": "GAM",
+   "image": "https://static.lolesports.com/teams/1643263093448_GAMyellow.png",
+   "games": 27,
+   "wins": 16 },
+  "Movistar R7": {
+   "code": "R7",
+   "image": "https://static.lolesports.com/teams/1673451007201_IMG_3488.png",
+   "games": 10,
+   "wins": 3 },
+  "Team Liquid Alienware": {
+   "code": "TLAW",
+   "image": "https://static.lolesports.com/teams/1769357207762_TLAlienware_Minimal_Bug-White.png",
+   "games": 15,
+   "wins": 6 },
+  "T1": {
+   "code": "T1",
+   "image": "https://static.lolesports.com/teams/1726801573959_539px-T1_2019_full_allmode.png",
+   "games": 56,
+   "wins": 43 },
+  "Movistar KOI": {
+   "code": "MKOI",
+   "image": "https://static.lolesports.com/teams/1734012609283_MKOI_FullColor_Blue.png",
+   "games": 25,
+   "wins": 10 },
+  "Cloud9 Kia": {
+   "code": "C9",
+   "image": "https://static.lolesports.com/teams/1736924120254_C9Kia_IconBlue_Transparent_2000x2000.png",
+   "games": 6,
+   "wins": 2 },
+  "Gen.G Esports": {
+   "code": "GEN",
+   "image": "https://static.lolesports.com/teams/1773829250929_GENGLOGO_GOLD.png",
+   "games": 36,
+   "wins": 22 },
+  "Beijing JDG Esports": {
+   "code": "JDG",
+   "image": "https://static.lolesports.com/teams/1627457924722_29.png",
+   "games": 13,
+   "wins": 8 },
+  "Dplus KIA": {
+   "code": "DK",
+   "image": "https://static.lolesports.com/teams/1673260049703_DPlusKIALOGO11.png",
+   "games": 17,
+   "wins": 7 },
+  "G2 Esports": {
+   "code": "G2",
+   "image": "https://static.lolesports.com/teams/G2-FullonDark.png",
+   "games": 27,
+   "wins": 11 },
+  "NRG Kia": {
+   "code": "NRG",
+   "image": "https://static.lolesports.com/teams/1705723539817_NRGKiaWhite1.png",
+   "games": 8,
+   "wins": 4 },
+  "Weibo Gaming": {
+   "code": "WBG",
+   "image": "https://static.lolesports.com/teams/1641202879910_3.png",
+   "games": 35,
+   "wins": 19 },
+  "Fnatic": {
+   "code": "FNC",
+   "image": "https://static.lolesports.com/teams/1631819669150_fnc-2021-worlds.png",
+   "games": 20,
+   "wins": 7 },
+  "Suzhou LNG Esports": {
+   "code": "LNG",
+   "image": "https://static.lolesports.com/teams/1717487697003_LNGlogo.png",
+   "games": 19,
+   "wins": 10 },
+  "kt Rolster": {
+   "code": "KT",
+   "image": "https://static.lolesports.com/teams/kt_darkbackground.png",
+   "games": 28,
+   "wins": 18 },
+  "Bilibili Gaming": {
+   "code": "BLG",
+   "image": "https://static.lolesports.com/teams/1682322954525_Bilibili_Gaming_logo_20211.png",
+   "games": 46,
+   "wins": 26 },
+  "MVK Esports": {
+   "code": "MVK",
+   "image": "https://static.lolesports.com/teams/1767089709161_White_Logo.png",
+   "games": 4,
+   "wins": 0 },
+  "pai N Gaming": {
+   "code": "PAIN",
+   "image": "https://static.lolesports.com/teams/1674657011011_pain_logo_white.png",
+   "games": 12,
+   "wins": 5 },
+  "Fukuoka Soft Bank Hawks gaming": {
+   "code": "SHG",
+   "image": "https://static.lolesports.com/teams/1725885083108_SHG_White_Main.png",
+   "games": 4,
+   "wins": 0 },
+  "100 Thieves": {
+   "code": "100T",
+   "image": "https://static.lolesports.com/teams/1631819887423_100t-2021-worlds.png",
+   "games": 12,
+   "wins": 4 },
+  "TOP Esports": {
+   "code": "TES",
+   "image": "https://static.lolesports.com/teams/1592592064571_TopEsportsTES-01-FullonDark.png",
+   "games": 24,
+   "wins": 11 },
+  "Hanwha Life Esports": {
+   "code": "HLE",
+   "image": "https://static.lolesports.com/teams/1631819564399_hle-2021-worlds.png",
+   "games": 21,
+   "wins": 11 },
+  "Fly Quest": {
+   "code": "FLY",
+   "image": "https://static.lolesports.com/teams/flyquest-new-on-dark.png",
+   "games": 22,
+   "wins": 10 },
+  "Invictus Gaming": {
+   "code": "IG",
+   "image": "https://static.lolesports.com/teams/1634762917340_300px-Invictus_Gaming_logo.png",
+   "games": 4,
+   "wins": 1 },
+  "Vivo Keyd Stars": {
+   "code": "VKS",
+   "image": "https://static.lolesports.com/teams/1670542079678_vks.png",
+   "games": 7,
+   "wins": 2 },
+  "Team Secret Whales": {
+   "code": "TSW",
+   "image": "https://static.lolesports.com/teams/1774598000328_White_EyeText_600p.png",
+   "games": 6,
+   "wins": 2 },
+  "Anyone's Legend": {
+   "code": "AL",
+   "image": "https://static.lolesports.com/teams/1641199582689_.png",
+   "games": 10,
+   "wins": 6 } }
+}

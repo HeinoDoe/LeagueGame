@@ -5,6 +5,8 @@ export interface Champion {
   blurb: string; // short lore text
   tags: string[]; // ["Fighter", "Tank"]
   hp: number; // base HP at level 1
+  /** Every base stat from Data Dragon: hp, hpperlevel, armor, spellblock (MR), attackdamage, … */
+  stats: Record<string, number>;
   moveSpeed: number;
   attackRange: number;
   image: string; // file name on Data Dragon, e.g. "MonkeyKing.png"

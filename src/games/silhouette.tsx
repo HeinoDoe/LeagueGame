@@ -2,7 +2,7 @@
 // model. Every miss turns the lights up a little and unlocks a hint.
 
 import { lazy, Suspense } from 'react';
-import { GROUPS } from '../data/connections';
+import { regionOf } from '../data/connections';
 import { MODELS } from '../data/models';
 import { makeGuessChampionHole } from './guessChampion';
 
@@ -15,11 +15,6 @@ const SilhouetteStage = lazy(() =>
 const LIGHT = [0, 0, 0.04, 0.08, 0.15, 0.28];
 
 const modelsByKey = new Map(MODELS.filter((m) => m.kind === 'champion').map((m) => [m.key, m]));
-
-function regionOf(id: string): string {
-  const label = GROUPS.find((g) => g.kind === 'region' && g.members.includes(id))?.label;
-  return label ? label.replace(/^From (the )?/, '') : 'None';
-}
 
 export const SilhouetteHole = makeGuessChampionHole({
   pool: (data) => data.champions.filter((c) => modelsByKey.has(c.id)),

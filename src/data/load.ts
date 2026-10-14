@@ -14,7 +14,7 @@ interface RawChampion {
   title: string;
   blurb: string;
   tags: string[];
-  stats: { hp: number; movespeed: number; attackrange: number };
+  stats: Record<string, number> & { hp: number; movespeed: number; attackrange: number };
   image: { full: string };
 }
 
@@ -79,6 +79,7 @@ function toChampions(raw: RawBundle['champions']): Champion[] {
       blurb: stripHtml(c.blurb),
       tags: c.tags,
       hp: c.stats.hp,
+      stats: c.stats,
       moveSpeed: c.stats.movespeed,
       attackRange: c.stats.attackrange,
       image: c.image.full,
