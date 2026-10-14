@@ -1,6 +1,6 @@
 import type { HoleDef } from '../games/types';
 import type { HoleResult } from '../lib/storage';
-import { formatToPar, scoreTone } from '../lib/scoring';
+import { averageScore, crestUrl, rankOf } from '../lib/scoring';
 
 interface Props {
   layout: HoleDef[];
@@ -8,44 +8,53 @@ interface Props {
   current: number;
 }
 
+/** Today's games in a row: points + rank crest for each one played, and the running rank. */
 export function Scorecard({ layout, results, current }: Props) {
-  const played = layout.filter((h) => results[h.id]);
-  const strokes = played.reduce((s, h) => s + results[h.id].strokes, 0);
-  const par = played.reduce((s, h) => s + h.par, 0);
+  const scores = layout.filter((h) => results[h.id]).map((h) => results[h.id].score);
+  const avg = averageScore(scores);
 
   return (
     <div className="scorecard" aria-label="Scorecard">
       <table>
         <thead>
           <tr>
-            <th>Hole</th>
+            <th>Game</th>
             {layout.map((h, i) => (
               <th key={h.id} className={i === current ? 'current' : ''} title={h.name}>
                 {i + 1}
               </th>
             ))}
-            <th>Tot</th>
+            <th>Rank</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th>Par</th>
-            {layout.map((h) => (
-              <td key={h.id}>{h.par}</td>
-            ))}
-            <td>{layout.reduce((s, h) => s + h.par, 0)}</td>
-          </tr>
-          <tr>
-            <th>You</th>
+            <th>Points</th>
             {layout.map((h) => {
               const r = results[h.id];
               return (
-                <td key={h.id}>
-                  {r ? <span className={`score-chip ${scoreTone(r.strokes, h.par)}`}>{r.strokes}</span> : '–'}
+                <td key={h.id} title={r ? `${h.name}: ${rankOf(r.score).name}` : h.name}>
+                  {r ? (
+                    <span className={`score-cell rank-${rankOf(r.score).id}`}>
+                      <img src={crestUrl(rankOf(r.score))} alt="" />
+                      {r.score}
+                    </span>
+                  ) : (
+                    '–'
+                  )}
                 </td>
               );
             })}
-            <td className="total">{played.length ? `${strokes} (${formatToPar(strokes - par)})` : '–'}</td>
+            <td className="total">
+              {scores.length ? (
+                <span className={`score-cell rank-${rankOf(avg).id}`}>
+                  <img src={crestUrl(rankOf(avg))} alt="" />
+                  {rankOf(avg).name} · {avg}
+                </span>
+              ) : (
+                '–'
+              )}
+            </td>
           </tr>
         </tbody>
       </table>

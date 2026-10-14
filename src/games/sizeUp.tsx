@@ -6,7 +6,7 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { MODELS, type ModelInfo } from '../data/models';
 import { createRng, shuffle, type Rng } from '../lib/random';
-import { capStrokes, strokesFromAvgError } from '../lib/scoring';
+import { averageScore, scoreFromError } from '../lib/scoring';
 import type { HoleProps } from './types';
 
 const ModelStage = lazy(() => import('../components/ModelStage').then((m) => ({ default: m.ModelStage })));
@@ -57,7 +57,10 @@ function pickPairs(rng: Rng): Pair[] {
   return out;
 }
 
-export function SizeUpHole({ seed, par, onFinish }: HoleProps) {
+/** 100 when spot on; 10% off ≈ 82, 25% ≈ 61, twice the size ≈ 14. */
+const roundScore = (error: number) => scoreFromError(error, 2);
+
+export function SizeUpHole({ seed, onFinish }: HoleProps) {
   const pairs = useMemo(() => pickPairs(createRng(seed)), [seed]);
   const [round, setRound] = useState(0);
   const [logRatio, setLogRatio] = useState(0); // slider works in log space: feels even both ways
@@ -87,7 +90,7 @@ export function SizeUpHole({ seed, par, onFinish }: HoleProps) {
     } else {
       const avg = errors.reduce((a, b) => a + b, 0) / errors.length;
       setDone(true);
-      onFinish({ strokes: capStrokes(strokesFromAvgError(avg), par), detail: `Average error ${(avg * 100).toFixed(1)}%` });
+      onFinish({ score: averageScore(errors.map(roundScore)), detail: `Average error ${(avg * 100).toFixed(1)}%` });
     }
   }
 
@@ -129,7 +132,8 @@ export function SizeUpHole({ seed, par, onFinish }: HoleProps) {
       ) : (
         <div className="estimate-reveal">
           <p>
-            You said <strong>{guess.toFixed(2)}×</strong> · off by <strong>{(errors[round] * 100).toFixed(0)}%</strong>
+            You said <strong>{guess.toFixed(2)}×</strong> · off by <strong>{(errors[round] * 100).toFixed(0)}%</strong> ·{' '}
+            <strong>{roundScore(errors[round])} points</strong>
           </p>
           <p className="muted small">
             In-game: {pair.ref.name} {Math.round(pair.ref.height)} · {pair.target.name} {Math.round(pair.target.height)}{' '}
@@ -137,7 +141,7 @@ export function SizeUpHole({ seed, par, onFinish }: HoleProps) {
           </p>
           {!done && (
             <button className="btn primary" onClick={next}>
-              {round + 1 < pairs.length ? 'Next round →' : 'Finish hole'}
+              {round + 1 < pairs.length ? 'Next round →' : 'Finish'}
             </button>
           )}
         </div>

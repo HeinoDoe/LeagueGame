@@ -7,7 +7,8 @@ import { ResultCard } from '../components/ResultCard';
 import { Scorecard } from '../components/Scorecard';
 import { COURSE_NAMES, COURSE_SIZES, dailyLayout, dailySeed, type CourseSize } from '../lib/course';
 import { todayKey } from '../lib/date';
-import { formatToPar, scoreEmoji } from '../lib/scoring';
+import { averageScore, rankOf, shareSquare } from '../lib/scoring';
+import { RankBadge } from '../components/RankBadge';
 import { getDailyResults, logPlay, saveDailyResult, type HoleResult } from '../lib/storage';
 
 interface Props {
@@ -39,8 +40,8 @@ export function Course({ data, size, onChangeSize, onExit }: Props) {
     setJustPlayed(null);
   }
 
-  function finish(hole: HoleDef, r: { strokes: number; detail: string }) {
-    const result: HoleResult = { holeId: hole.id, par: hole.par, ...r };
+  function finish(hole: HoleDef, r: { score: number; detail: string }) {
+    const result: HoleResult = { holeId: hole.id, ...r };
     saveDailyResult(date, result);
     const at = logPlay({ ...result, mode: 'daily', date });
     setResults((prev) => ({ ...prev, [hole.id]: result }));
@@ -56,12 +57,17 @@ export function Course({ data, size, onChangeSize, onExit }: Props) {
   const showHole = hole && (!results[hole.id] || justPlayed?.holeId === hole.id);
   const allDone = layout.every((h) => results[h.id]);
 
-  const totalStrokes = layout.reduce((s, h) => s + (results[h.id]?.strokes ?? 0), 0);
-  const totalPar = layout.reduce((s, h) => s + h.par, 0);
+  // The day's score = the average of the games played, shown as a rank.
+  const dayScore = averageScore(layout.filter((h) => results[h.id]).map((h) => results[h.id].score));
+  const dayRank = rankOf(dayScore);
 
   function share() {
-    const line = layout.map((h) => scoreEmoji(results[h.id].strokes, h.par)).join('');
-    const text = `LoL Nerdles ${date} · ${size} holes\n${line}  ${totalStrokes} (${formatToPar(totalStrokes - totalPar)})`;
+    const line = layout.map((h) => shareSquare(results[h.id].score)).join('');
+    const text = [
+      `LoL Nerdles · ${date} · ${COURSE_NAMES[size]}`,
+      `${dayRank.emoji} ${dayRank.name} · ${dayScore}`,
+      line,
+    ].join(String.fromCharCode(10));
     navigator.clipboard?.writeText(text).then(
       () => setCopied(true),
       () => setCopied(false),
@@ -87,18 +93,16 @@ export function Course({ data, size, onChangeSize, onExit }: Props) {
             key={dailySeed(date, hole.id)}
             data={data}
             seed={dailySeed(date, hole.id)}
-            par={hole.par}
             onFinish={(r) => finish(hole, r)}
           />
           {justPlayed?.holeId === hole.id && results[hole.id] && (
             <ResultCard
-              par={hole.par}
-              strokes={results[hole.id].strokes}
+              score={results[hole.id].score}
               detail={results[hole.id].detail}
               playAt={justPlayed.at}
               actions={
                 <button className="btn primary" onClick={next}>
-                  {allDone ? 'See final card →' : `Hole ${firstUnplayed(layout, results, current + 1) + 1} →`}
+                  {allDone ? 'See today’s rank →' : `Game ${firstUnplayed(layout, results, current + 1) + 1} →`}
                 </button>
               }
             />
@@ -107,23 +111,25 @@ export function Course({ data, size, onChangeSize, onExit }: Props) {
       )}
 
       {allDone && !showHole && (
-        <section className="summary">
-          <span className="eyebrow">Round complete</span>
-          <h2>
-            {totalStrokes} strokes · <em>{formatToPar(totalStrokes - totalPar)}</em>
-          </h2>
-          <p className="emoji-line">{layout.map((h) => scoreEmoji(results[h.id].strokes, h.par)).join(' ')}</p>
+        <section className={`summary rank-${dayRank.id}`}>
+          <span className="eyebrow">Today’s rank</span>
+          <RankBadge score={dayScore} size="large" showName={false} />
+          <h2>{dayRank.name}</h2>
+          <p className="result-points">
+            <strong>{dayScore}</strong> / 100 points on average over {layout.length} games
+          </p>
+          <p className="emoji-line">{layout.map((h) => shareSquare(results[h.id].score)).join(' ')}</p>
           <div className="button-row">
             <button className="btn primary" onClick={share}>
-              {copied ? 'Copied!' : 'Copy scorecard'}
+              {copied ? 'Copied!' : 'Copy my result'}
             </button>
             {COURSE_SIZES.filter((s) => s > size).map((s) => (
               <button key={s} className="btn" onClick={() => onChangeSize(s)}>
-                Extend to {s} holes
+                Extend to {s} games
               </button>
             ))}
           </div>
-          <p className="muted small">Leaderboards come later — for now your scores are saved in this browser.</p>
+          <p className="muted small">Real leaderboards come later — for now your scores are saved in this browser.</p>
         </section>
       )}
     </div>

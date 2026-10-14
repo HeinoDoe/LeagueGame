@@ -7,18 +7,16 @@ interface Props {
   children: ReactNode;
 }
 
-/** The header + frame around every hole. */
+/** The header + frame around every game. */
 export function HoleShell({ hole, number, children }: Props) {
   return (
     <section className="hole">
       <header className="hole-header">
-        <div className="flag">
-          <span className="flag-num">{number ?? '•'}</span>
+        <div className="game-badge">
+          <span>{number ?? '•'}</span>
         </div>
         <div className="hole-titles">
-          <span className="eyebrow">
-            {number ? `Hole ${number} · ` : ''}Par {hole.par}
-          </span>
+          {number && <span className="eyebrow">Game {number}</span>}
           <h2>{hole.name}</h2>
           <p className="muted">{hole.howTo}</p>
         </div>

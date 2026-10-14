@@ -4,7 +4,7 @@
 import { useMemo, useState, type FC, type ReactNode } from 'react';
 import type { Champion, GameData } from '../data/types';
 import { createRng, pick } from '../lib/random';
-import { capStrokes, MAX_OVER_PAR } from '../lib/scoring';
+import { scoreFromGuesses } from '../lib/scoring';
 import { ChampionInput } from '../components/ChampionInput';
 import type { HoleProps } from './types';
 
@@ -35,7 +35,7 @@ const defaultHints = (target: Champion, data: GameData): Hint[] => [
 ];
 
 export function makeGuessChampionHole({ clue, pool, hints = defaultHints }: Options): FC<HoleProps> {
-  return function GuessChampionHole({ data, seed, par, onFinish }: HoleProps) {
+  return function GuessChampionHole({ data, seed, onFinish }: HoleProps) {
     const target = useMemo(() => pick(createRng(seed), pool ? pool(data) : data.champions), [data, seed]);
     const [guesses, setGuesses] = useState<Champion[]>([]);
     const [status, setStatus] = useState<'playing' | 'won' | 'lost'>('playing');
@@ -49,14 +49,13 @@ export function makeGuessChampionHole({ clue, pool, hints = defaultHints }: Opti
       setGuesses(next);
       if (c.id === target.id) {
         setStatus('won');
-        // 1st guess = 2 strokes (eagle on a par 4), 2nd = 3 (birdie), 3rd = par …
         onFinish({
-          strokes: capStrokes(next.length + 1, par),
+          score: scoreFromGuesses(next.length),
           detail: `Solved in ${next.length} guess${next.length === 1 ? '' : 'es'}`,
         });
       } else if (next.length >= MAX_GUESSES) {
         setStatus('lost');
-        onFinish({ strokes: par + MAX_OVER_PAR, detail: `Missed — it was ${target.name}` });
+        onFinish({ score: scoreFromGuesses(null), detail: `Missed — it was ${target.name}` });
       }
     }
 

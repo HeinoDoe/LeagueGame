@@ -9,7 +9,6 @@ import { GROUPS, SKIN_COUNTS, pickKind, type ConnectionGroup } from '../data/con
 import { DEEP_DIVE_QUESTIONS, type TextQuestion, type Tier } from '../data/curated/deepDive';
 import { ChampionInput, normalize } from '../components/ChampionInput';
 import { createRng, pick, sample, shuffle, type Rng } from '../lib/random';
-import { capStrokes } from '../lib/scoring';
 import type { HoleProps } from './types';
 
 const TIERS: Tier[] = ['common', 'uncommon', 'rare', 'deep'];
@@ -107,17 +106,6 @@ function makeDive(rng: Rng, champions: Map<string, Champion>): Category[] {
   return shuffle(rng, picked);
 }
 
-/** Up to 20 points (five deep cuts). Par 5 ≈ 9–11 points. */
-function strokesFromPoints(points: number): number {
-  if (points >= 18) return 2;
-  if (points >= 15) return 3;
-  if (points >= 12) return 4;
-  if (points >= 9) return 5;
-  if (points >= 6) return 6;
-  if (points >= 3) return 7;
-  return 8;
-}
-
 function TextAnswer({ onSubmit }: { onSubmit: (text: string) => void }) {
   const [text, setText] = useState('');
   function submit(e: FormEvent) {
@@ -143,7 +131,7 @@ function TextAnswer({ onSubmit }: { onSubmit: (text: string) => void }) {
   );
 }
 
-export function DeepDiveHole({ data, seed, par, onFinish }: HoleProps) {
+export function DeepDiveHole({ data, seed, onFinish }: HoleProps) {
   const champions = useMemo(() => new Map(data.champions.map((c) => [c.id, c])), [data]);
   const categories = useMemo(() => makeDive(createRng(seed), champions), [seed, champions]);
   const [results, setResults] = useState<(Hit | null)[]>([]);
@@ -158,7 +146,8 @@ export function DeepDiveHole({ data, seed, par, onFinish }: HoleProps) {
     setMisses([]);
     if (next.length === categories.length) {
       const pts = next.reduce((sum, r) => sum + (r ? POINTS[r.tier] : 0), 0);
-      onFinish({ strokes: capStrokes(strokesFromPoints(pts), par), detail: `${pts} depth points` });
+      // Up to 20 depth points (five deep cuts) → 0–100.
+      onFinish({ score: Math.round((100 * pts) / (4 * categories.length)), detail: `${pts} depth points` });
     }
   }
 

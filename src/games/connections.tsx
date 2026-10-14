@@ -4,12 +4,11 @@
 import { useMemo, useState } from 'react';
 import { makePuzzle } from '../data/connections';
 import { createRng, shuffle } from '../lib/random';
-import { capStrokes, MAX_OVER_PAR } from '../lib/scoring';
 import type { HoleProps } from './types';
 
 const MAX_MISTAKES = 4;
 
-export function ConnectionsHole({ data, seed, par, onFinish }: HoleProps) {
+export function ConnectionsHole({ data, seed, onFinish }: HoleProps) {
   const champions = useMemo(() => new Map(data.champions.map((c) => [c.id, c])), [data]);
   const puzzle = useMemo(() => makePuzzle(createRng(seed), new Set(champions.keys())), [seed, champions]);
   const [order, setOrder] = useState(() => shuffle(createRng(`${seed}:tiles`), puzzle?.flatMap((g) => g.picks) ?? []));
@@ -45,9 +44,9 @@ export function ConnectionsHole({ data, seed, par, onFinish }: HoleProps) {
       setSelected([]);
       if (next.length === 4) {
         setStatus('won');
-        // No mistakes = 2 strokes (eagle on a par 4), each mistake costs one.
+        // Solved: 100, minus 20 per mistake.
         onFinish({
-          strokes: capStrokes(2 + mistakes, par),
+          score: 100 - 20 * mistakes,
           detail: mistakes ? `Solved with ${mistakes} mistake${mistakes === 1 ? '' : 's'}` : 'Solved without a mistake',
         });
       }
@@ -60,7 +59,8 @@ export function ConnectionsHole({ data, seed, par, onFinish }: HoleProps) {
       setStatus('lost');
       setSelected([]);
       setMessage('');
-      onFinish({ strokes: par + MAX_OVER_PAR, detail: `Found ${found.length} of 4 groups` });
+      // Out of mistakes: 10 per group found, so failing never beats solving (min. 40).
+      onFinish({ score: 10 * found.length, detail: `Found ${found.length} of 4 groups` });
     }
   }
 

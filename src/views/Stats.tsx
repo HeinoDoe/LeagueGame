@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { HOLES } from '../games/registry';
 import { clearAllData, getPlays } from '../lib/storage';
-import { formatToPar } from '../lib/scoring';
+import { averageScore } from '../lib/scoring';
+import { RankBadge } from '../components/RankBadge';
 
 interface Props {
   onExit: () => void;
 }
 
-/** Your personal "which holes are actually fun?" dashboard. */
+/** Your personal "which games are actually fun?" dashboard. */
 export function Stats({ onExit }: Props) {
   const [plays, setPlays] = useState(getPlays);
 
@@ -17,7 +18,10 @@ export function Stats({ onExit }: Props) {
     return {
       hole: h,
       plays: mine.length,
-      avgToPar: mine.length ? mine.reduce((s, p) => s + (p.strokes - p.par), 0) / mine.length : null,
+      // Plays from before the 0–100 score have no score; they still count for fun.
+      avgScore: mine.some((p) => typeof p.score === 'number')
+        ? averageScore(mine.filter((p) => typeof p.score === 'number').map((p) => p.score))
+        : null,
       avgFun: rated.length ? rated.reduce((s, p) => s + (p.fun ?? 0), 0) / rated.length : null,
       ratings: rated.length,
     };
@@ -41,19 +45,19 @@ export function Stats({ onExit }: Props) {
         </button>
         <span className="eyebrow">Leaderboard</span>
       </div>
-      <h2>Which holes are worth keeping?</h2>
+      <h2>Which games are worth keeping?</h2>
       <p className="muted">
-        Sorted by your average fun rating. Average to par tells you if a hole is too easy (very negative) or too
-        hard (very positive) — tweak its scoring in the code.
+        Sorted by your average fun rating. The average score shows if a game is too easy (always Challenger) or too
+        hard (always Iron) — tweak its scoring in the code.
       </p>
 
       <div className="table-wrap">
         <table className="stats-table">
           <thead>
             <tr>
-              <th>Hole</th>
+              <th>Game</th>
               <th>Plays</th>
-              <th>Avg to par</th>
+              <th>Avg score</th>
               <th>Fun</th>
             </tr>
           </thead>
@@ -62,10 +66,17 @@ export function Stats({ onExit }: Props) {
               <tr key={r.hole.id}>
                 <td>
                   <strong>{r.hole.name}</strong>
-                  <span className="muted small"> · par {r.hole.par}</span>
                 </td>
                 <td>{r.plays}</td>
-                <td>{r.avgToPar === null ? '–' : formatToPar(Math.round(r.avgToPar * 10) / 10)}</td>
+                <td>
+                  {r.avgScore === null ? (
+                    '–'
+                  ) : (
+                    <span className="best-rank">
+                      <RankBadge score={r.avgScore} /> {r.avgScore}
+                    </span>
+                  )}
+                </td>
                 <td>
                   {r.avgFun === null ? (
                     <span className="muted">not rated</span>

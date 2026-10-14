@@ -5,7 +5,7 @@
 import { useEffect, useMemo, useRef, useState, type FC } from 'react';
 import type { GameData } from '../data/types';
 import { createRng, shuffle, type Rng } from '../lib/random';
-import { capStrokes } from '../lib/scoring';
+import { scoreFromCorrect } from '../lib/scoring';
 import type { HoleProps } from './types';
 
 export interface HLEntity {
@@ -44,7 +44,7 @@ function Card({ e, value, tone = '' }: { e: HLEntity; value: string; tone?: stri
 }
 
 export function makeHigherLowerHole({ setup, rounds = 5 }: Config): FC<HoleProps> {
-  return function HigherLowerHole({ data, seed, par, onFinish }: HoleProps) {
+  return function HigherLowerHole({ data, seed, onFinish }: HoleProps) {
     // A chain where neighbours never tie on that round's measure, so every call has a right answer.
     const { chain, measureAt } = useMemo(() => {
       const rng = createRng(seed);
@@ -93,9 +93,8 @@ export function makeHigherLowerHole({ setup, rounds = 5 }: Config): FC<HoleProps
       setReveal(correct);
       timer.current = window.setTimeout(() => {
         if (nextAnswers.length === total) {
-          const wrong = nextAnswers.filter((x) => !x).length;
-          // Perfect = 2 strokes (eagle on par 4), each miss adds a stroke.
-          onFinish({ strokes: capStrokes(2 + wrong, par), detail: `${total - wrong}/${total} correct` });
+          const correct = nextAnswers.filter((x) => x).length;
+          onFinish({ score: scoreFromCorrect(correct, total), detail: `${correct}/${total} correct` });
         } else {
           setRound((r) => r + 1);
           setReveal(null);

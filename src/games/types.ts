@@ -3,11 +3,10 @@ import type { GameData } from '../data/types';
 
 export interface HoleProps {
   data: GameData;
-  /** Same seed => same puzzle. Daily: "daily:<date>:<holeId>", range: random. */
+  /** Same seed => same puzzle. Daily: "daily:<version>:<date>:<holeId>", free play: random. */
   seed: string;
-  par: number;
-  /** Call exactly once when the hole is over. */
-  onFinish: (result: { strokes: number; detail: string }) => void;
+  /** Call exactly once when the game is over. `score` is 0–100 (see src/lib/scoring.ts). */
+  onFinish: (result: { score: number; detail: string }) => void;
 }
 
 export interface HoleDef {
@@ -15,7 +14,6 @@ export interface HoleDef {
   name: string;
   tagline: string;
   howTo: string;
-  par: number;
   /** procedural = generates itself from data forever; curated = needs your hand-made content */
   kind: 'procedural' | 'curated';
   Component: FC<HoleProps>;

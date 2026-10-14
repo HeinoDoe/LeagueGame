@@ -1,12 +1,12 @@
 # LoL Nerdles
 
-A daily golf course of League of Legends mini-games. Every day there's a new
-course of 9 holes; players choose a **Quick Three**, **Half Course (6)** or
-**Full Course (9)**. Each hole is a different mini-game, and every game's result is
-turned into golf strokes so they all add up on one scorecard.
+Daily League of Legends mini-games. Every day there's a new set of 9 games;
+players choose a **Quick Three**, **Half Course (6)** or **Full Course (9)**.
+Every game scores 0–100 points, shown as a League rank (Iron → Challenger), so
+totally different games add up to one rank for the day.
 
-There's also **Free Play Mode** (play any hole as often as you want) and a
-**Leaderboard** (for now: your scores and fun rating per hole) — so you can find out which
+There's also **Free Play Mode** (play any game as often as you want) and a
+**Leaderboard** (for now: your scores and fun rating per game) — so you can find out which
 games are actually fun before building more.
 
 ---
@@ -71,39 +71,49 @@ game from `src/data/curated/deepDive.ts`. Those tiers are first guesses — move
 answers between tiers, add questions, and update the year ranges after each
 Worlds/MSI.
 
-## 3. The 9 holes
+## 3. The 9 games
 
-| Hole | Game | Par | Type |
-|---|---|---|---|
-| Redacted Lore | Guess the champion from their bio (name blacked out) | 4 | procedural |
-| Stat Check | Higher/lower on champion stats — a different stat every round | 4 | procedural |
-| Pro Play | Higher/lower on real Worlds stats: players, champions or teams | 4 | procedural |
-| Big Numbers | Estimate a huge number on a 1-to-a-billion slider (or type it) | 3 | procedural |
-| Silhouette | Guess the champion from their 3D model's shadow; each miss adds light + a hint | 4 | procedural |
-| Splash Zoom | Guess the champion from a zoomed-in piece of splash art | 4 | procedural |
-| Rift Connections | Sort 16 champions into 4 hidden groups (NYT Connections-style) | 4 | procedural |
-| Size Up | Resize a champion's 3D model next to another (Magnitudle-style) | 3 | procedural |
-| Deep Dive | 5 categories, one answer each, rarer = more points (Krillion-style) | 5 | curated |
+| Name | Game | Type |
+|---|---|---|
+| Redacted Lore | Guess the champion from their bio (name blacked out) | procedural |
+| Stat Check | Higher/lower on champion stats — a different stat every round | procedural |
+| Pro Play | Higher/lower on real Worlds stats: players, champions or teams | procedural |
+| Big Numbers | Estimate a huge number on a 1-to-a-billion slider (or type it) | procedural |
+| Silhouette | Guess the champion from their 3D model's shadow; each miss adds light + a hint | procedural |
+| Splash Zoom | Guess the champion from a zoomed-in piece of splash art | procedural |
+| Rift Connections | Sort 16 champions into 4 hidden groups (NYT Connections-style) | procedural |
+| Size Up | Resize a champion's 3D model next to another (Magnitudle-style) | procedural |
+| Deep Dive | 5 categories, one answer each, rarer = more points (Krillion-style) | curated |
 
-**Procedural** holes generate new puzzles forever from Riot's data — no daily
-work from you. **Curated** holes need you to add content now and then.
+**Procedural** games generate new puzzles forever from Riot's data — no daily
+work from you. **Curated** games need you to add content now and then.
 
-## 4. How the daily course works
+## 4. How the daily games and the score work
 
-- The date (UTC, like most daily games) is the "seed". Same date → same 9 holes
+- The date (UTC, like most daily games) is the "seed". Same date → same 9 games
   in the same order → same puzzles for every player.
-- 3 holes = the first 3 of today's 9, 6 = the first 6. Results are saved, so a
+- 3 games = the first 3 of today's 9, 6 = the first 6. Results are saved, so a
   player can finish 3 and later **extend to 6 or 9** without replaying.
-- Scoring: each hole turns its result into strokes (capped at par + 3). Example:
-  Silhouette solved on the 1st guess = 2 strokes = eagle on a par 4.
-- At the end you get a shareable emoji scorecard (🦅 🐦 🟩 🟨 🟥).
+- **Score:** every game gives 0–100 points (`src/lib/scoring.ts`):
+  - guess the champion: 1st guess 100, then 15 less per guess, missed 0
+  - higher/lower: 20 per correct call
+  - sliders (Size Up, Big Numbers): 100 when spot on, fewer the further off
+  - Rift Connections: 100 − 20 per mistake (out of mistakes: 10 per group found)
+  - Deep Dive: depth points × 5
+- The day's score is the **average** of the games played, shown as a rank:
+  95+ Challenger, 90+ Grandmaster, 85+ Master, 75+ Diamond, 65+ Emerald,
+  55+ Platinum, 45+ Gold, 35+ Silver, 20+ Bronze, below that Iron. An average
+  means a Quick Three and a Full Course can be compared directly.
+- At the end you get a shareable result: rank, points and one 🟩/🟨/🟥 per game.
+- **Reset the daily for everyone:** bump `DAILY_VERSION` in `src/lib/course.ts`.
+  Today's progress is forgotten and every day gets fresh puzzles.
 
 ## 5. Finding your favourite games
 
-After every hole you can rate it 1–5 stars. The **Leaderboard** sorts all holes
-by your average fun rating, and shows the average score to par — if a hole is
-always −2 it's too easy, if it's always +3 it's too hard. Tune the scoring
-(e.g. `strokesFromAvgError` in `src/lib/scoring.ts`) or drop the hole.
+After every game you can rate it 1–5 stars. The **Leaderboard** sorts all games
+by your average fun rating, and shows your average score — if a game is always
+Challenger it's too easy, if it's always Iron it's too hard. Tune its scoring
+(the helpers in `src/lib/scoring.ts`) or drop the game.
 
 ## 6. Project structure
 
@@ -112,7 +122,7 @@ src/
   App.tsx              ← screens + data loading
   views/               ← Home, Course (3/6/9), Range, Stats
   games/
-    registry.ts        ← THE LIST OF HOLES — add/remove games here
+    registry.ts        ← THE LIST OF GAMES — add/remove games here
     guessChampion.tsx  ← engine: guess a champion from a clue (Redacted Lore, Silhouette)
     higherLower.tsx    ← engine: higher/lower chains (Stat Check, Pro Play)
     sizeUp.tsx, connections.tsx, deepDive.tsx …
@@ -120,22 +130,22 @@ src/
   data/
     load.ts            ← Data Dragon loader
     curated/           ← your hand-made content
-  lib/                 ← seeded random, dates, golf scoring, saving
+  lib/                 ← seeded random, dates, scoring + ranks, saving
 scripts/fetch-data.mjs ← pins patch data into public/data/
 scripts/fetch-models.mjs, fetch-connections.mjs ← regenerate src/data/generated/
 ```
 
-## 7. Adding a new hole
+## 7. Adding a new game
 
 1. Create a component in `src/games/` that receives `HoleProps`
-   (`data`, `seed`, `par`, `onFinish`). Use `createRng(seed)` for anything random.
-2. Call `onFinish({ strokes, detail })` exactly once when the hole is over.
+   (`data`, `seed`, `onFinish`). Use `createRng(seed)` for anything random.
+2. Call `onFinish({ score, detail })` exactly once when the game is over (`score` = 0–100).
 3. Add it to the `HOLES` list in `src/games/registry.ts`.
 
-Many new holes need no new component at all — the engines are reusable. For
+Many new games need no new component at all — the engines are reusable. For
 example, a new higher/lower hole is just a `makeHigherLowerHole({ setup })` with
 your own list of things to compare (see `src/games/statCheck.tsx`), and a new
-guess-the-champion hole is a `makeGuessChampionHole({ clue })`
+guess-the-champion game is a `makeGuessChampionHole({ clue })`
 (see `src/games/splashZoom.tsx`).
 
 ## 8. Online + working together
@@ -163,13 +173,13 @@ If you both work at the same time, use a branch per feature
 **Later, a domain:** buy one, add it under Settings → Pages → Custom domain,
 and set the DNS records GitHub shows you. Nothing in the code needs to change.
 
-## 9. Next steps (when you know which holes you like)
+## 9. Next steps (when you know which games you like)
 
 - **Leaderboards + accounts:** add Supabase (free tier). `src/lib/storage.ts` is
   the only file that talks to storage, so that's where it plugs in. For real
   leaderboards, check answers on the server so people can't cheat.
-- **TFT holes:** Data Dragon also has TFT champion, trait and augment files.
-- **Front 9 / Back 9:** add 9 more holes and expand to an 18-hole course.
+- **TFT games:** Data Dragon also has TFT champion, trait and augment files.
+- **More games per day:** add more games and let the daily pick from a bigger pool.
 - **Before ads:** your own domain, an Impressum, a privacy policy and a cookie
   consent banner (if you're in Germany/EU).
 

@@ -129,11 +129,8 @@ em { font-style: normal; color: var(--gold); }
 .scorecard th:first-child { text-align: left; color: var(--muted); font-weight: 600; }
 .scorecard thead th.current { background: var(--fairway); color: #fff; }
 .scorecard .total { font-weight: 700; color: var(--gold-bright); }
-.score-chip { display: inline-grid; place-items: center; min-width: 24px; height: 24px; border-radius: 50%; font-weight: 700; }
-.score-chip.under { box-shadow: 0 0 0 2px var(--under); }
-.score-chip.par { color: var(--par); }
-.score-chip.over { box-shadow: inset 0 0 0 2px var(--over); border-radius: 4px; }
-.score-chip.way-over { box-shadow: inset 0 0 0 2px var(--way-over), 0 0 0 3px var(--bg-2), 0 0 0 5px var(--way-over); border-radius: 3px; }
+.score-cell { display: inline-flex; align-items: center; gap: 3px; font-weight: 700; color: var(--rank, var(--text)); }
+.score-cell img { width: 18px; height: 18px; }
 
 .hole {
   background: linear-gradient(180deg, var(--surface), var(--bg-2));
@@ -144,13 +141,12 @@ em { font-style: normal; color: var(--gold); }
 .hole-header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 18px; }
 .hole-header h2 { margin: 2px 0 4px; }
 .hole-header p { margin: 0; font-size: 0.92rem; }
-.flag {
+.game-badge {
   flex: none; width: 46px; height: 46px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, var(--fairway-bright), var(--fairway));
-  display: grid; place-items: center;
-  box-shadow: 0 0 0 3px var(--bg-2), 0 0 0 4px var(--gold);
+  background: radial-gradient(circle at 35% 30%, var(--surface-2), var(--bg));
+  display: grid; place-items: center; border: 1px solid var(--gold);
+  font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--gold-bright);
 }
-.flag-num { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: #fff; }
 
 .hole-body { display: flex; flex-direction: column; gap: 14px; }
 
@@ -313,12 +309,28 @@ input[type='range'] { width: 100%; accent-color: var(--gold); height: 28px; }
 
 /* result card */
 .result-card { margin-top: 18px; padding: 18px; border-radius: var(--radius); background: var(--bg); border: 1px solid var(--line); text-align: center; }
-.result-card.under { border-color: var(--under); }
-.result-card.par { border-color: var(--par); }
-.result-card.over { border-color: var(--over); }
-.result-card.way-over { border-color: var(--way-over); }
 .result-score { display: flex; flex-direction: column; gap: 2px; }
-.result-label { font-family: var(--font-display); font-size: 1.8rem; color: var(--gold-bright); }
+.result-label { font-family: var(--font-display); font-size: 1.8rem; color: var(--rank, var(--gold-bright)); }
+.result-points { margin: 0; color: var(--muted); }
+.result-points strong { color: var(--text); font-size: 1.2rem; }
+.result-card { border-color: var(--rank, var(--line)); }
+
+/* ranks: each one has its own colour (the crests and emblems come from Community Dragon) */
+.rank-iron { --rank: #8d8a88; }
+.rank-bronze { --rank: #c07c55; }
+.rank-silver { --rank: #b9c4cc; }
+.rank-gold { --rank: #e2b85b; }
+.rank-platinum { --rank: #4fb6ae; }
+.rank-emerald { --rank: #36c47e; }
+.rank-diamond { --rank: #7c9cff; }
+.rank-master { --rank: #c36ef0; }
+.rank-grandmaster { --rank: #ef5a52; }
+.rank-challenger { --rank: #f3d488; }
+.rank-badge { display: inline-flex; align-items: center; gap: 4px; vertical-align: middle; color: var(--rank); font-weight: 600; }
+.rank-badge.small img { width: 20px; height: 20px; }
+.rank-badge.large { display: flex; justify-content: center; margin: 6px 0 2px; }
+.rank-badge.large img { width: 76px; height: 76px; filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45)); }
+.best-rank { display: inline-flex; align-items: center; gap: 4px; }
 .fun-rating { margin-top: 14px; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 0.85rem; color: var(--muted); }
 .stars button { background: none; border: 0; font-size: 1.6rem; padding: 0 3px; color: var(--line); transition: color 0.1s, transform 0.1s; }
 .stars button:hover { transform: scale(1.15); }
@@ -326,7 +338,8 @@ input[type='range'] { width: 100%; accent-color: var(--gold); height: 28px; }
 
 /* summary */
 .summary { text-align: center; padding: 28px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px); }
-.summary h2 { font-size: 2rem; margin-top: 8px; }
+.summary h2 { font-size: 2rem; margin-top: 8px; color: var(--rank, var(--gold-bright)); }
+.summary { border-color: var(--rank, var(--line)); }
 .emoji-line { font-size: 1.6rem; letter-spacing: 0.1em; margin: 8px 0; }
 
 /* range + stats */

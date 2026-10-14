@@ -1,30 +1,32 @@
 import { useState, type ReactNode } from 'react';
 import { ratePlay } from '../lib/storage';
-import { scoreLabel, scoreTone } from '../lib/scoring';
+import { rankOf } from '../lib/scoring';
+import { RankBadge } from './RankBadge';
 
 interface Props {
-  par: number;
-  strokes: number;
+  score: number;
   detail: string;
   playAt: number;
   actions: ReactNode;
 }
 
-/** Shown after a hole: the golf score, plus a "how fun was it?" rating for you. */
-export function ResultCard({ par, strokes, detail, playAt, actions }: Props) {
+/** Shown after a game: the points and rank, plus a "how fun was it?" rating for you. */
+export function ResultCard({ score, detail, playAt, actions }: Props) {
   const [fun, setFun] = useState<number | null>(null);
 
   return (
-    <div className={`result-card ${scoreTone(strokes, par)}`}>
+    <div className={`result-card rank-${rankOf(score).id}`}>
       <div className="result-score">
-        <span className="result-label">{scoreLabel(strokes, par)}</span>
-        <span className="muted">
-          {strokes} stroke{strokes === 1 ? '' : 's'} on a par {par} · {detail}
+        <RankBadge score={score} size="large" showName={false} />
+        <span className="result-label">{rankOf(score).name}</span>
+        <span className="result-points">
+          <strong>{score}</strong> / 100 points
         </span>
+        <span className="muted small">{detail}</span>
       </div>
 
       <div className="fun-rating">
-        <span>How fun was this hole?</span>
+        <span>How fun was this game?</span>
         <div className="stars" role="radiogroup" aria-label="Fun rating">
           {[1, 2, 3, 4, 5].map((n) => (
             <button

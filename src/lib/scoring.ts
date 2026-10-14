@@ -1,59 +1,67 @@
-// Golf scoring. Every hole turns its own result into "strokes",
-// so totally different games can be added up on one scorecard.
+// One score for every game: 0–100 points, shown as a League rank (Iron → Challenger).
+// Each game turns its own result into points with the helpers at the bottom,
+// so totally different games can be averaged and compared.
 
-/** Worst score allowed on a hole (like a "max triple bogey" house rule). */
-export const MAX_OVER_PAR = 3;
-
-export function capStrokes(strokes: number, par: number): number {
-  return Math.max(1, Math.min(Math.round(strokes), par + MAX_OVER_PAR));
+export interface Rank {
+  id: string; // also the Community Dragon file name
+  name: string;
+  min: number; // lowest score that reaches this rank
+  emoji: string; // for the copy-and-share text
 }
 
-export function scoreLabel(strokes: number, par: number): string {
-  if (strokes === 1) return 'Hole in one!';
-  const diff = strokes - par;
-  if (diff <= -3) return 'Albatross';
-  if (diff === -2) return 'Eagle';
-  if (diff === -1) return 'Birdie';
-  if (diff === 0) return 'Par';
-  if (diff === 1) return 'Bogey';
-  if (diff === 2) return 'Double bogey';
-  return 'Triple bogey';
+/** Highest first. Tune `min` to make ranks easier or harder to reach. */
+export const RANKS: Rank[] = [
+  { id: 'challenger', name: 'Challenger', min: 95, emoji: '👑' },
+  { id: 'grandmaster', name: 'Grandmaster', min: 90, emoji: '🔥' },
+  { id: 'master', name: 'Master', min: 85, emoji: '🔮' },
+  { id: 'diamond', name: 'Diamond', min: 75, emoji: '💎' },
+  { id: 'emerald', name: 'Emerald', min: 65, emoji: '💚' },
+  { id: 'platinum', name: 'Platinum', min: 55, emoji: '💠' },
+  { id: 'gold', name: 'Gold', min: 45, emoji: '🥇' },
+  { id: 'silver', name: 'Silver', min: 35, emoji: '🥈' },
+  { id: 'bronze', name: 'Bronze', min: 20, emoji: '🥉' },
+  { id: 'iron', name: 'Iron', min: 0, emoji: '🔩' },
+];
+
+export function rankOf(score: number): Rank {
+  return RANKS.find((r) => score >= r.min) ?? RANKS[RANKS.length - 1];
 }
 
-export type ScoreTone = 'under' | 'par' | 'over' | 'way-over';
+const RANKED = 'https://raw.communitydragon.org/16.20/plugins/rcp-fe-lol-static-assets/global/default/images';
 
-export function scoreTone(strokes: number, par: number): ScoreTone {
-  const diff = strokes - par;
-  if (diff < 0) return 'under';
-  if (diff === 0) return 'par';
-  if (diff === 1) return 'over';
-  return 'way-over';
+/** The rank's crest (SVG, sharp at any size). */
+export const crestUrl = (rank: Rank) => `${RANKED}/ranked-mini-crests/${rank.id}.svg`;
+
+/** Average of several game scores, rounded. */
+export function averageScore(scores: number[]): number {
+  return scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
 }
 
-export function scoreEmoji(strokes: number, par: number): string {
-  const diff = strokes - par;
-  if (strokes === 1) return '⛳';
-  if (diff <= -2) return '🦅';
-  if (diff === -1) return '🐦';
-  if (diff === 0) return '🟩';
-  if (diff === 1) return '🟨';
+/** One square per game for the share text. */
+export function shareSquare(score: number): string {
+  if (score >= 70) return '🟩';
+  if (score >= 40) return '🟨';
   return '🟥';
 }
 
-export function formatToPar(diff: number): string {
-  if (diff === 0) return 'E';
-  return diff > 0 ? `+${diff}` : `${diff}`;
+// ---- Turning a game's result into points -----------------------------------
+
+const clamp = (n: number) => Math.max(0, Math.min(100, Math.round(n)));
+
+/** Guess-the-champion games (6 guesses): 1st guess 100, then 15 less per guess; missed 0. */
+export function scoreFromGuesses(guessesUsed: number | null): number {
+  return guessesUsed === null ? 0 : clamp(115 - 15 * guessesUsed);
+}
+
+/** Share of correct answers (higher/lower calls). */
+export function scoreFromCorrect(correct: number, total: number): number {
+  return total ? clamp((100 * correct) / total) : 0;
 }
 
 /**
- * For estimation holes (par 3): turn the average % error into strokes.
- * Tune these thresholds once you've played a few rounds.
+ * Slider games: 100 when spot on, falling smoothly the further off you are.
+ * `error` is 0 for a perfect guess; `steepness` sets how quickly points drop.
  */
-export function strokesFromAvgError(avgError: number): number {
-  if (avgError <= 0.03) return 1;
-  if (avgError <= 0.08) return 2;
-  if (avgError <= 0.15) return 3;
-  if (avgError <= 0.25) return 4;
-  if (avgError <= 0.4) return 5;
-  return 6;
+export function scoreFromError(error: number, steepness: number): number {
+  return clamp(100 * Math.exp(-steepness * error));
 }

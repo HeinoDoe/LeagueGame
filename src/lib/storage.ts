@@ -2,6 +2,8 @@
 // When you add accounts + leaderboards later (e.g. Supabase), this is the
 // file you'd swap out — the rest of the app only calls these functions.
 
+import { DAILY_VERSION } from './course';
+
 const PREFIX = 'riftlinks:';
 
 function read<T>(key: string, fallback: T): T {
@@ -23,8 +25,7 @@ function write(key: string, value: unknown): void {
 
 export interface HoleResult {
   holeId: string;
-  par: number;
-  strokes: number;
+  score: number; // 0–100
   detail: string;
 }
 
@@ -38,20 +39,24 @@ export interface PlayLog extends HoleResult {
 }
 
 // ---- Daily course results -------------------------------------------------
+// The key includes DAILY_VERSION, so bumping it starts everyone's day fresh.
+
+const dailyKey = (date: string) => `daily:v${DAILY_VERSION}:${date}`;
 
 export function getDailyResults(date: string): Record<string, HoleResult> {
-  return read(`daily:${date}`, {} as Record<string, HoleResult>);
+  return read(dailyKey(date), {} as Record<string, HoleResult>);
 }
 
 export function saveDailyResult(date: string, result: HoleResult): void {
   const all = getDailyResults(date);
   all[result.holeId] = result;
-  write(`daily:${date}`, all);
+  write(dailyKey(date), all);
 }
 
 // ---- Play log (daily + free play), used by the Stats page -----------
 
 export function getPlays(): PlayLog[] {
+  // Plays from before the 0–100 score have no `score`; their fun ratings still count.
   return read('plays', [] as PlayLog[]);
 }
 

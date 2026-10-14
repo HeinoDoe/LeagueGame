@@ -1,13 +1,14 @@
 // "Big Numbers": estimate a huge number on a slider that goes from 1 to a
 // billion. Every answer is worked out from live game data or real Worlds stats,
-// so it's always exact. Good guesses need a bit of maths.
+// so it's always exact. Good guesses need a bit of maths — and the questions
+// never say how many champions are involved, so that's part of the guess.
 
 import { useMemo, useState } from 'react';
 import type { Champion, GameData } from '../data/types';
 import { GROUPS, SKIN_COUNTS } from '../data/connections';
 import { PRO, PRO_YEARS } from '../data/proplay';
 import { createRng, pick, shuffle, type Rng } from '../lib/random';
-import { capStrokes } from '../lib/scoring';
+import { averageScore, scoreFromError } from '../lib/scoring';
 import type { HoleProps } from './types';
 
 interface Question {
@@ -31,6 +32,10 @@ const STATS: [id: string, label: string][] = [
 const statOf = (c: Champion, id: string) =>
   id === 'hp18' ? c.stats.hp + 17 * (c.stats.hpperlevel ?? 0) : (c.stats[id] ?? 0);
 const total = (list: number[]) => Math.round(list.reduce((a, b) => a + b, 0));
+
+/** Revealed after the guess: how many champions, and the average. */
+const breakdown = (value: number, count: number) =>
+  `That's ${count} champions, ${Math.round(value / count).toLocaleString()} each on average.`;
 
 /** "from Ionia" → "are from Ionia", "with a Pool Party skin" → "have a Pool Party skin" … */
 function asVerb(phrase: string): string {
@@ -56,23 +61,23 @@ function groupQuestion(rng: Rng, byId: Map<string, Champion>): Question {
   if (rng() < 0.3) return { ask: `How many champions ${asVerb(phrase)}?`, value: members.length };
   const [stat, label] = pick(rng, STATS);
   const value = total(members.map((c) => statOf(c, stat)));
-  return {
-    ask: `Add up the ${label} of all ${members.length} champions ${phrase}`,
-    value,
-    note: `That's ${Math.round(value / members.length).toLocaleString()} on average.`,
-  };
+  return { ask: `Add up the ${label} of every champion ${phrase}`, value, note: breakdown(value, members.length) };
 }
 
 /** Whole-game totals. */
 function gameQuestion(rng: Rng, data: GameData): Question {
   const all = data.champions;
   const n = all.length;
+  const sum = (ask: string, values: number[]) => {
+    const value = total(values);
+    return { ask, value, note: breakdown(value, n) };
+  };
   return pick(rng, [
     { ask: 'How many champions are in League of Legends right now?', value: n },
-    { ask: `Add up the base health of all ${n} champions`, value: total(all.map((c) => c.stats.hp)) },
-    { ask: `Add up the health of all ${n} champions at level 18`, value: total(all.map((c) => statOf(c, 'hp18'))) },
-    { ask: `Add up the base move speed of all ${n} champions`, value: total(all.map((c) => c.stats.movespeed)) },
-    { ask: `Add up the attack range of all ${n} champions`, value: total(all.map((c) => c.stats.attackrange)) },
+    sum('Add up the base health of every champion', all.map((c) => c.stats.hp)),
+    sum('Add up the health of every champion at level 18', all.map((c) => statOf(c, 'hp18'))),
+    sum('Add up the base move speed of every champion', all.map((c) => c.stats.movespeed)),
+    sum('Add up the attack range of every champion', all.map((c) => c.stats.attackrange)),
     {
       ask: 'How many skins do all champions have together (not counting their default look)?',
       value: total(all.map((c) => SKIN_COUNTS[c.id] ?? 0)),
@@ -122,15 +127,8 @@ function parse(text: string): number | null {
   return n >= 1 ? n : null;
 }
 
-/** Average distance in powers of ten → strokes on a par 3. */
-function strokesFromLogError(avg: number): number {
-  if (avg <= 0.02) return 1; // within ~5%
-  if (avg <= 0.06) return 2; // ~15%
-  if (avg <= 0.15) return 3; // ~40%
-  if (avg <= 0.3) return 4; // 2×
-  if (avg <= 0.6) return 5; // 4×
-  return 6;
-}
+/** Points for one round, from the distance in powers of ten: 10% off ≈ 88, 2× off ≈ 40, 10× off ≈ 5. */
+const roundScore = (logError: number) => scoreFromError(logError, 3);
 
 function describeMiss(guess: number, actual: number): string {
   const ratio = Math.max(guess / actual, actual / guess);
@@ -141,7 +139,7 @@ function describeMiss(guess: number, actual: number): string {
 
 const compact = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 2 });
 
-export function BigNumbersHole({ data, seed, par, onFinish }: HoleProps) {
+export function BigNumbersHole({ data, seed, onFinish }: HoleProps) {
   const questions = useMemo(() => {
     const rng = createRng(seed);
     const byId = new Map(data.champions.map((c) => [c.id, c]));
@@ -170,7 +168,7 @@ export function BigNumbersHole({ data, seed, par, onFinish }: HoleProps) {
       setDone(true);
       const ratio = 10 ** avg; // how many times off, on average
       onFinish({
-        strokes: capStrokes(strokesFromLogError(avg), par),
+        score: averageScore(errors.map(roundScore)),
         detail: ratio < 2 ? `Off by ${Math.round((ratio - 1) * 100)}% on average` : `Off by ${ratio.toFixed(1)}× on average`,
       });
     }
@@ -229,12 +227,13 @@ export function BigNumbersHole({ data, seed, par, onFinish }: HoleProps) {
       ) : (
         <div className="estimate-reveal">
           <p>
-            Actual: <strong>{q.value.toLocaleString()}</strong> · you were {describeMiss(guess, q.value)}
+            Actual: <strong>{q.value.toLocaleString()}</strong> · you were {describeMiss(guess, q.value)} ·{' '}
+            <strong>{roundScore(errors[round])} points</strong>
           </p>
           {q.note && <p className="muted small">{q.note}</p>}
           {!done && (
             <button className="btn primary" onClick={next}>
-              {round + 1 < questions.length ? 'Next round →' : 'Finish hole'}
+              {round + 1 < questions.length ? 'Next round →' : 'Finish'}
             </button>
           )}
         </div>
