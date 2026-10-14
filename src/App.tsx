@@ -30,8 +30,23 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <button className="brand" onClick={home}>
+          <span className="brand-mark" aria-hidden />
           LoL Nerdles
         </button>
+        <nav className="topnav">
+          <button
+            className={`btn${view.name === 'range' ? ' current' : ''}`}
+            onClick={() => setView({ name: 'range' })}
+          >
+            Free Play
+          </button>
+          <button
+            className={`btn primary${view.name === 'stats' ? ' current' : ''}`}
+            onClick={() => setView({ name: 'stats' })}
+          >
+            Leaderboard
+          </button>
+        </nav>
       </header>
 
       <main>
@@ -49,11 +64,7 @@ export default function App() {
         )}
         {!data && !error && <div className="loading">Loading…</div>}
         {data && view.name === 'home' && (
-          <Home
-            onPlay={(size) => setView({ name: 'course', size })}
-            onRange={() => setView({ name: 'range' })}
-            onStats={() => setView({ name: 'stats' })}
-          />
+          <Home data={data} onPlay={(size) => setView({ name: 'course', size })} />
         )}
         {data && view.name === 'course' && (
           <Course data={data} size={view.size} onChangeSize={(size) => setView({ name: 'course', size })} onExit={home} />

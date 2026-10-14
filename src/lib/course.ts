@@ -5,10 +5,13 @@ export const COURSE_SIZES = [3, 6, 9] as const;
 export type CourseSize = (typeof COURSE_SIZES)[number];
 
 export const COURSE_NAMES: Record<CourseSize, string> = {
-  3: 'Quick Three',
-  6: 'Half Course',
-  9: 'Full Course',
+  3: 'Skirmish',
+  6: 'Teamfight',
+  9: 'Full Game',
 };
+
+/** Rough time to play, shown on the home page. */
+export const COURSE_MINUTES: Record<CourseSize, number> = { 3: 5, 6: 10, 9: 15 };
 
 /**
  * Bump this to reset the daily for everyone: today's progress is forgotten

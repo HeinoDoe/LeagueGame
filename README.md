@@ -1,13 +1,16 @@
 # LoL Nerdles
 
 Daily League of Legends mini-games. Every day there's a new set of 9 games;
-players choose a **Quick Three**, **Half Course (6)** or **Full Course (9)**.
+players choose a **Skirmish (3)**, **Teamfight (6)** or **Full Game (9)**.
 Every game scores 0–100 points, shown as a League rank (Iron → Challenger), so
 totally different games add up to one rank for the day.
 
 There's also **Free Play Mode** (play any game as often as you want) and a
 **Leaderboard** (for now: your scores and fun rating per game) — so you can find out which
 games are actually fun before building more.
+
+The look is "Shurima Sun": sandstone, turquoise and sun gold with stepped
+corners. Every colour and font is a token at the top of `src/styles.css`.
 
 ---
 
@@ -103,7 +106,7 @@ work from you. **Curated** games need you to add content now and then.
 - The day's score is the **average** of the games played, shown as a rank:
   95+ Challenger, 90+ Grandmaster, 85+ Master, 75+ Diamond, 65+ Emerald,
   55+ Platinum, 45+ Gold, 35+ Silver, 20+ Bronze, below that Iron. An average
-  means a Quick Three and a Full Course can be compared directly.
+  means a Skirmish and a Full Game can be compared directly.
 - At the end you get a shareable result: rank, points and one 🟩/🟨/🟥 per game.
 - **Reset the daily for everyone:** bump `DAILY_VERSION` in `src/lib/course.ts`.
   Today's progress is forgotten and every day gets fresh puzzles.

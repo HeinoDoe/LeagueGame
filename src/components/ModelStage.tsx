@@ -21,11 +21,11 @@ class Stage {
   private scene = new THREE.Scene();
   private camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 1, 100000);
   private slots: { pivot: THREE.Group; model: Loaded; height: number }[] = [];
-  private shadows = [0, 1].map(() => this.blob(0x000000, 0.35));
-  private floor = this.blob(0x2a4c3f, 1);
+  private shadows = [0, 1].map(() => this.blob(0x35240f, 0.22));
+  private floor = this.blob(0xead9b8, 1); // sandstone, to match the page
   private guessBar = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1),
-    new THREE.MeshBasicMaterial({ color: 0xf0e6d2, transparent: true, opacity: 0.85, depthTest: false }),
+    new THREE.MeshBasicMaterial({ color: 0x0b7b87, transparent: true, opacity: 0.9, depthTest: false }),
   );
   private view: View = { ratio: 1, spin: false };
   private shown = { ratio: 1, frame: 0 };
